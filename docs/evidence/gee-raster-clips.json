@@ -1,0 +1,32 @@
+[
+  {
+    "dataset": "srtm",
+    "bytes": 1670,
+    "sha256": "c35223b7dbe9badda5991f2b7342e11765ec96ab094703df4892cb7327b21a7c",
+    "crs": "EPSG:4326",
+    "valid_pixels": 1260,
+    "nodata_sentinel_pixels": 0,
+    "min": 533.0,
+    "max": 577.0
+  },
+  {
+    "dataset": "population_constrained",
+    "bytes": 1209,
+    "sha256": "00e5783d61e7a62062ef67cb4a348459ade6cdef1d5d5928389b361719c16f6a",
+    "crs": "EPSG:4326",
+    "valid_pixels": 120,
+    "nodata_sentinel_pixels": 1,
+    "min": 45.308528900146484,
+    "max": 116.41534423828125
+  },
+  {
+    "dataset": "sentinel1_2021",
+    "bytes": 10959,
+    "sha256": "7a800c38ad3e9e425b087a8bde6b3dbaa49c703a6dd0d55ad85aff7db39f2561",
+    "crs": "EPSG:32643",
+    "valid_pixels": 1190,
+    "nodata_sentinel_pixels": 0,
+    "min": -19.316427860991553,
+    "max": 12.80818602109007
+  }
+]

@@ -1,0 +1,85 @@
+{
+  "Hatkanangale": {
+    "raw_polygons": 68,
+    "unnamed_polygons": 1,
+    "unnamed_area_km2": 7.2367829299215325,
+    "named_unique_settlements": 63,
+    "repeated_codes": {
+      "275300428504207100": [
+        "Hingangaon",
+        "Hingangaon"
+      ],
+      "275300428504209700": [
+        "Khotwadi",
+        "Khotwadi"
+      ],
+      "275300428543406000": [
+        "Ichalkaranji (M Cl)",
+        "Ichalkaranji (M Cl)"
+      ],
+      "275300428504205500": [
+        "Bhadole",
+        "Bhadole"
+      ]
+    },
+    "name_conflicts": [],
+    "decision": "Same code and same name may be dissolved into multipart settlements in M1. Blank names with truncated tehsil codes are not village identifiers; keep an explicit exclusion/coverage record."
+  },
+  "Karvir": {
+    "raw_polygons": 136,
+    "unnamed_polygons": 4,
+    "unnamed_area_km2": 19.6456344845572,
+    "named_unique_settlements": 130,
+    "repeated_codes": {
+      "2753004287": [
+        "",
+        "",
+        "",
+        ""
+      ],
+      "275300428704216900": [
+        "Nagadewadi",
+        "Nagadewadi"
+      ],
+      "275300428704217000": [
+        "Balinge",
+        "Balinge"
+      ]
+    },
+    "name_conflicts": [],
+    "decision": "Same code and same name may be dissolved into multipart settlements in M1. Blank names with truncated tehsil codes are not village identifiers; keep an explicit exclusion/coverage record."
+  },
+  "Panhala": {
+    "raw_polygons": 137,
+    "unnamed_polygons": 4,
+    "unnamed_area_km2": 1.7227137926025857,
+    "named_unique_settlements": 131,
+    "repeated_codes": {
+      "275300428404194700": [
+        "Nebapur",
+        "Nebapur"
+      ],
+      "275300428404194500": [
+        "Panhala  (Rural)",
+        "Panhala  (Rural)"
+      ],
+      "2753004284": [
+        "",
+        "",
+        "",
+        ""
+      ]
+    },
+    "name_conflicts": [],
+    "decision": "Same code and same name may be dissolved into multipart settlements in M1. Blank names with truncated tehsil codes are not village identifiers; keep an explicit exclusion/coverage record."
+  },
+  "Shirol": {
+    "raw_polygons": 56,
+    "unnamed_polygons": 0,
+    "unnamed_area_km2": 0.0,
+    "named_unique_settlements": 56,
+    "repeated_codes": {},
+    "name_conflicts": [],
+    "decision": "Same code and same name may be dissolved into multipart settlements in M1. Blank names with truncated tehsil codes are not village identifiers; keep an explicit exclusion/coverage record."
+  }
+}

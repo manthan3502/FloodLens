@@ -1,0 +1,90 @@
+[
+  {
+    "name": "rainfall-Karvir-2019.json",
+    "url": "https://archive-api.open-meteo.com/v1/archive?latitude=16.7&longitude=74.22&start_date=2019-08-01&end_date=2019-08-15&daily=precipitation_sum&timezone=Asia%2FKolkata",
+    "http_status": 200,
+    "bytes": 567,
+    "sha256": "db3467a9c2f49af2b4d982379d5c58c6430d7b8d9a9598b78c5d4dad7c8708f5",
+    "status": "fetched_not_yet_validated",
+    "days": 15,
+    "nulls": 0,
+    "total_mm": 453.4
+  },
+  {
+    "name": "rainfall-Karvir-2021.json",
+    "url": "https://archive-api.open-meteo.com/v1/archive?latitude=16.7&longitude=74.22&start_date=2021-07-15&end_date=2021-07-31&daily=precipitation_sum&timezone=Asia%2FKolkata",
+    "http_status": 200,
+    "bytes": 602,
+    "sha256": "1b0241b7990fa527dcc586dc18da2904c0283a04e9b6d0126519afe7d656d1e6",
+    "status": "fetched_not_yet_validated",
+    "days": 17,
+    "nulls": 0,
+    "total_mm": 309.6
+  },
+  {
+    "name": "rainfall-Panhala-2019.json",
+    "url": "https://archive-api.open-meteo.com/v1/archive?latitude=16.83&longitude=74.1&start_date=2019-08-01&end_date=2019-08-15&daily=precipitation_sum&timezone=Asia%2FKolkata",
+    "http_status": 200,
+    "bytes": 570,
+    "sha256": "7373138a762f219e6da1d1e7afe83443410ab0a979138ec3cf50f092205ed00d",
+    "status": "fetched_not_yet_validated",
+    "days": 15,
+    "nulls": 0,
+    "total_mm": 518.1
+  },
+  {
+    "name": "rainfall-Panhala-2021.json",
+    "url": "https://archive-api.open-meteo.com/v1/archive?latitude=16.83&longitude=74.1&start_date=2021-07-15&end_date=2021-07-31&daily=precipitation_sum&timezone=Asia%2FKolkata",
+    "http_status": 200,
+    "bytes": 603,
+    "sha256": "5110d162741b42365612d74939e3af091059db74c5cac7b7abcca22dc5beaea7",
+    "status": "fetched_not_yet_validated",
+    "days": 17,
+    "nulls": 0,
+    "total_mm": 321.8
+  },
+  {
+    "name": "rainfall-Hatkanangale-2019.json",
+    "url": "https://archive-api.open-meteo.com/v1/archive?latitude=16.75&longitude=74.43&start_date=2019-08-01&end_date=2019-08-15&daily=precipitation_sum&timezone=Asia%2FKolkata",
+    "http_status": 200,
+    "bytes": 568,
+    "sha256": "ee6951f8b7f7756ad8ec345339992965df333e2af6f8c2180f54e2dbc68cf33d",
+    "status": "fetched_not_yet_validated",
+    "days": 15,
+    "nulls": 0,
+    "total_mm": 320.5
+  },
+  {
+    "name": "rainfall-Hatkanangale-2021.json",
+    "url": "https://archive-api.open-meteo.com/v1/archive?latitude=16.75&longitude=74.43&start_date=2021-07-15&end_date=2021-07-31&daily=precipitation_sum&timezone=Asia%2FKolkata",
+    "http_status": 200,
+    "bytes": 604,
+    "sha256": "1ea10fc86a4a48702a9435c1abe7730337597052b46611dfb04ea0c5038f1315",
+    "status": "fetched_not_yet_validated",
+    "days": 17,
+    "nulls": 0,
+    "total_mm": 212.2
+  },
+  {
+    "name": "rainfall-Shirol-2019.json",
+    "url": "https://archive-api.open-meteo.com/v1/archive?latitude=16.73&longitude=74.6&start_date=2019-08-01&end_date=2019-08-15&daily=precipitation_sum&timezone=Asia%2FKolkata",
+    "http_status": 200,
+    "bytes": 565,
+    "sha256": "dd9a506d003e941c5d9a4fb45fc73e13a81fcee4b70698e9ffb39486e1feff06",
+    "status": "fetched_not_yet_validated",
+    "days": 15,
+    "nulls": 0,
+    "total_mm": 260.8
+  },
+  {
+    "name": "rainfall-Shirol-2021.json",
+    "url": "https://archive-api.open-meteo.com/v1/archive?latitude=16.73&longitude=74.6&start_date=2021-07-15&end_date=2021-07-31&daily=precipitation_sum&timezone=Asia%2FKolkata",
+    "http_status": 200,
+    "bytes": 602,
+    "sha256": "5d7825b238e77667db575905225f88df4f9d23c9ce166d323e828735b0782eaf",
+    "status": "fetched_not_yet_validated",
+    "days": 17,
+    "nulls": 0,
+    "total_mm": 191.9
+  }
+]

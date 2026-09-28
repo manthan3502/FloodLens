@@ -41,4 +41,6 @@ From the root, run `python -m data_pipeline.feasibility`, then `python -m data_p
 
 For Earth Engine, register a noncommercial project, enable the API, then run `.venv\Scripts\earthengine authenticate`. Set `GEE_PROJECT` in the shell to that project ID before the probes. Never paste access tokens or service-account keys into chat or commit them.
 
-This guide is provisional until the M7 fresh-clone verification. Docker commands have not passed on this host because Docker/WSL are not installed.
+This guide is provisional until the M7 fresh-clone verification. On 2026-09-29 IST, Docker Compose started PostGIS successfully and spatial SQL checks passed on this host.
+
+The registered Earth Engine project is `floodlens-510018`. Project registration and local OAuth consent are separate steps. To authorize this Python client, run `.venv\Scripts\earthengine authenticate --auth_mode=localhost:8085`, then complete the Google browser consent. Set `$env:GEE_PROJECT='floodlens-510018'` before running the probes. `python -m data_pipeline.verify_m0_runtime` rechecks the database and per-tehsil Earth Engine access without repeating earlier downloads.

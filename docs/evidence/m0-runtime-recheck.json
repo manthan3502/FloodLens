@@ -1,0 +1,69 @@
+{
+  "checked_at": "2026-09-28T19:15:37.974339+00:00",
+  "database": {
+    "postgis_version": "3.5 USE_GEOS=1 USE_PROJ=1 USE_STATS=1",
+    "spatial_roundtrip": true,
+    "geojson": {
+      "type": "Point",
+      "coordinates": [
+        74.22,
+        16.7
+      ]
+    }
+  },
+  "earth_engine": {
+    "status": "access_verified",
+    "project": "floodlens-510018",
+    "samples": {
+      "Karvir": {
+        "scene_counts": {
+          "2019": 0,
+          "2021": 1
+        },
+        "srtm_sample_m": {
+          "elevation": 555.6555066299511
+        },
+        "worldpop_2020_sample": {
+          "population": 24622.166106886027
+        }
+      },
+      "Panhala": {
+        "scene_counts": {
+          "2019": 0,
+          "2021": 1
+        },
+        "srtm_sample_m": {
+          "elevation": 699.2108489013947
+        },
+        "worldpop_2020_sample": {
+          "population": 1207.2492310897978
+        }
+      },
+      "Hatkanangale": {
+        "scene_counts": {
+          "2019": 0,
+          "2021": 1
+        },
+        "srtm_sample_m": {
+          "elevation": 592.6882238994232
+        },
+        "worldpop_2020_sample": {
+          "population": 7022.804266998813
+        }
+      },
+      "Shirol": {
+        "scene_counts": {
+          "2019": 0,
+          "2021": 1
+        },
+        "srtm_sample_m": {
+          "elevation": 540.7481843508646
+        },
+        "worldpop_2020_sample": {
+          "population": 5029.17929683012
+        }
+      }
+    },
+    "population_note": "Constrained 2020 WorldPop population band, UN-adjusted per the Earth Engine catalog. Exact collection: WorldPop/GP/100m/pop_age_sex_cons_unadj. Replaces the stalled unadjusted country download; not the unconstrained population probe."
+  }
+}

@@ -2,7 +2,7 @@
 
 Geospatial flood susceptibility and emergency-response prioritization for rural Kolhapur, Maharashtra.
 
-**Status: M0 in progress. Not deployed. No risk results or flood labels have been produced.**
+**Status: M0 complete; Gate A GO WITH REDUCED SCOPE. M1 data pipeline begins next. Not deployed; no risk scores have been produced.**
 
 The approved [final PRD](docs/floodlens_final_prd.md) is the implementation specification. The study area is Karvir, Panhala, Hatkanangale and Shirol. Milestones proceed only when their acceptance checks pass.
 
