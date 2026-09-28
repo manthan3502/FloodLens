@@ -1,0 +1,58 @@
+[
+  {
+    "tehsil_sample": "Karvir",
+    "bbox": [
+      74.2,
+      16.7,
+      74.24,
+      16.74
+    ],
+    "url": "https://api.openstreetmap.org/api/0.6/map?bbox=74.2%2C16.7%2C74.24%2C16.74",
+    "ways": 1511,
+    "rivers_streams": 6,
+    "major_roads": 67,
+    "status": "sample_only_not_full_tehsil"
+  },
+  {
+    "tehsil_sample": "Panhala",
+    "bbox": [
+      74.08,
+      16.81,
+      74.12,
+      16.85
+    ],
+    "url": "https://api.openstreetmap.org/api/0.6/map?bbox=74.08%2C16.81%2C74.12%2C16.85",
+    "ways": 97,
+    "rivers_streams": 0,
+    "major_roads": 11,
+    "status": "sample_only_not_full_tehsil"
+  },
+  {
+    "tehsil_sample": "Hatkanangale",
+    "bbox": [
+      74.41,
+      16.73,
+      74.45,
+      16.77
+    ],
+    "url": "https://api.openstreetmap.org/api/0.6/map?bbox=74.41%2C16.73%2C74.45%2C16.77",
+    "ways": 417,
+    "rivers_streams": 0,
+    "major_roads": 10,
+    "status": "sample_only_not_full_tehsil"
+  },
+  {
+    "tehsil_sample": "Shirol",
+    "bbox": [
+      74.58,
+      16.71,
+      74.62,
+      16.75
+    ],
+    "url": "https://api.openstreetmap.org/api/0.6/map?bbox=74.58%2C16.71%2C74.62%2C16.75",
+    "ways": 543,
+    "rivers_streams": 1,
+    "major_roads": 23,
+    "status": "sample_only_not_full_tehsil"
+  }
+]

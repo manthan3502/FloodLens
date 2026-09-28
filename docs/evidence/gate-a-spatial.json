@@ -1,0 +1,52 @@
+[
+  {
+    "name": "mh1.geojson",
+    "url": "https://raw.githubusercontent.com/datameet/indian_village_boundaries/master/mh/mh1.geojson",
+    "http_status": 200,
+    "bytes": 69156321,
+    "sha256": "e06e3ec723ff1b4f123718912143afcea72cb4fcdae65c44029e35c3657d8a99",
+    "status": "fetched_not_yet_validated"
+  },
+  {
+    "name": "mh2.geojson",
+    "url": "https://raw.githubusercontent.com/datameet/indian_village_boundaries/master/mh/mh2.geojson",
+    "http_status": 200,
+    "bytes": 78589952,
+    "sha256": "244b872927b2d5fd2e8817c98c3e375b43d387cfe209f7a23d86a10f46469775",
+    "status": "fetched_not_yet_validated"
+  },
+  {
+    "name": "iitb-villages.zip",
+    "url": "https://www.cse.iitb.ac.in/~pocra/MahaCensus_shapefile_data1.1/Shape_File_3July/kolhapur.zip",
+    "http_status": 200,
+    "bytes": 23704558,
+    "sha256": "ee9fb71f3564c7cce3ee17f2cb1729ed1bfdd319a8c880a99e0ac82565dd86f7",
+    "status": "fetched_not_yet_validated"
+  },
+  {
+    "name": "iitb-tehsils.zip",
+    "url": "https://www.cse.iitb.ac.in/~pocra/MahaCensus_shapefile_data1.2/Boundary_Shape_File_21July/kolhapur.zip",
+    "http_status": 200,
+    "bytes": 58080,
+    "sha256": "8c49969d73b1480bf8ab7d7b172e5899ebbfcea1a0183aafbc1ac21c1d83f52a",
+    "status": "fetched_not_yet_validated"
+  },
+  {
+    "name": "osm-retry.json",
+    "url": "https://overpass.kumi.systems/api/interpreter",
+    "status": "failed",
+    "error": "The read operation timed out"
+  },
+  {
+    "name": "osm-retry.json",
+    "url": "https://overpass-api.de/api/interpreter",
+    "status": "failed",
+    "error": "Client error '406 Not Acceptable' for url 'https://overpass-api.de/api/interpreter?data=%5Bout%3Ajson%5D%5Btimeout%3A50%5D%3B%28way%5Bwaterway%3Driver%5D%2816.5%2C73.9%2C17.05%2C74.85%29%3Bway%5Bwaterway%3Dstream%5D%2816.5%2C73.9%2C17.05%2C74.85%29%3Bway%5Bhighway%3Dprimary%5D%2816.5%2C73.9%2C17.05%2C74.85%29%3Bway%5Bhighway%3Dsecondary%5D%2816.5%2C73.9%2C17.05%2C74.85%29%3Bway%5Bhighway%3Dtertiary%5D%2816.5%2C73.9%2C17.05%2C74.85%29%3B%29%3Bout+geom%3B'\nFor more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/406"
+  },
+  {
+    "name": "worldpop-constrained",
+    "url": "https://data.worldpop.org/GIS/Population/Global_2000_2020_Constrained/2020/BSGM/IND/ind_ppp_2020_constrained.tif",
+    "status": "failed",
+    "error": "Range downloading not supported by this server!"
+  }
+]

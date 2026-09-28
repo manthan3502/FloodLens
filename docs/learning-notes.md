@@ -30,3 +30,5 @@ A monorepo keeps the API, frontend, pipeline and documentation together. PostGIS
 ### Current lesson
 
 Both village sources can be downloaded; that alone does not establish coverage quality. Earth Engine needs real authorization. Missing authorization is not evidence of poor SAR label quality and cannot justify the Gate B index fallback by itself.
+
+The sources use different spellings for Hatkanangale. Always inspect attribute values before concluding that an area is missing. All 397 target DataMeet polygons are valid, yet three tehsils have repeated Census identifiers: geometry validity and identifier quality are separate checks. The map passed a real Edge browser check, and the first foundation commit was pushed as `d32dd6f` while M0 remained open.

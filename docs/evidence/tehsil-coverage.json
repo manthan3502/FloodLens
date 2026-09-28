@@ -1,0 +1,40 @@
+[
+  {
+    "tehsil": "Hatkanangale",
+    "datameet_polygons": 68,
+    "valid_polygons": 68,
+    "village_union_km2": 613.72005729063,
+    "census_2001_codes_unique": false,
+    "coverage_status": "Tehsil missing in downloaded IITB boundary archive; full coverage not established."
+  },
+  {
+    "tehsil": "Karvir",
+    "datameet_polygons": 136,
+    "valid_polygons": 136,
+    "village_union_km2": 665.9513767039855,
+    "census_2001_codes_unique": false,
+    "reference_area_km2": 665.8290704912608,
+    "covered_fraction": 0.997711810069941,
+    "area_outside_reference_km2": 1.6458495869648009
+  },
+  {
+    "tehsil": "Panhala",
+    "datameet_polygons": 137,
+    "valid_polygons": 137,
+    "village_union_km2": 563.1604095794798,
+    "census_2001_codes_unique": false,
+    "reference_area_km2": 563.4020408116144,
+    "covered_fraction": 0.9963500035154315,
+    "area_outside_reference_km2": 1.8147842362265652
+  },
+  {
+    "tehsil": "Shirol",
+    "datameet_polygons": 56,
+    "valid_polygons": 56,
+    "village_union_km2": 501.03229253093446,
+    "census_2001_codes_unique": true,
+    "reference_area_km2": 501.2285490661407,
+    "covered_fraction": 0.9943320200534493,
+    "area_outside_reference_km2": 2.6446968295395976
+  }
+]

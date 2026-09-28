@@ -1,0 +1,87 @@
+{
+  "datameet": {
+    "Hatkalangale": {
+      "count": 68,
+      "invalid": 0,
+      "empty": 0,
+      "duplicates": 0
+    },
+    "Karvir": {
+      "count": 136,
+      "invalid": 0,
+      "empty": 0,
+      "duplicates": 0
+    },
+    "Shirol": {
+      "count": 56,
+      "invalid": 0,
+      "empty": 0,
+      "duplicates": 0
+    },
+    "Panhala": {
+      "count": 137,
+      "invalid": 0,
+      "empty": 0,
+      "duplicates": 0
+    }
+  },
+  "iitb": {
+    "iitb-villages.zip": [
+      {
+        "layer": "kolhapur",
+        "features": 1216,
+        "crs": "EPSG:4326",
+        "fields": [
+          "state_code",
+          "state_name",
+          "district_c",
+          "district_n",
+          "taluka_cod",
+          "taluka_nam",
+          "census_201",
+          "village_na",
+          "cd_blk_cod",
+          "cd_blk_nam",
+          "gp_code",
+          "gp_name",
+          "ref_year",
+          "taluka_hq",
+          "taluka_hq_",
+          "district_h",
+          "district_1",
+          "near_stat_",
+          "near_sta_1",
+          "near_sta_2"
+        ],
+        "bounds": [
+          73.71168747400003,
+          15.740543363000029,
+          74.70059528400003,
+          17.132889672000033
+        ]
+      }
+    ],
+    "iitb-tehsils.zip": [
+      {
+        "layer": "kolhapur",
+        "features": 7,
+        "crs": "EPSG:4326",
+        "fields": [
+          "district_c",
+          "district_1",
+          "district_n",
+          "district_2",
+          "taluka_cod",
+          "taluka_nam"
+        ],
+        "bounds": [
+          73.68830480576965,
+          15.74236184785322,
+          74.70050352621652,
+          17.18193188621445
+        ]
+      }
+    ]
+  },
+  "decision": "Candidate inspection only; coverage against tehsil geometry and Census joins still required."
+}
