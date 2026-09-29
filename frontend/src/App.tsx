@@ -28,14 +28,14 @@ export default function App() {
   useEffect(() => {
     const controller = new AbortController()
     setLoading(true); setError('')
-    api<VillageCollection>('/scenarios/evaluate', { scenario_id: scenario }, controller.signal).then(result => { setData(result); setLoading(false) }).catch(e => { if (!controller.signal.aborted) { setError(e.message); setLoading(false) } })
+    api<VillageCollection>('/scenarios/evaluate', { scenario_id: scenario }, controller.signal).then(result => { if (!controller.signal.aborted) { setData(result); setLoading(false) } }).catch(e => { if (!controller.signal.aborted) { setError(e.message); setLoading(false) } })
     return () => controller.abort()
   }, [scenario, retry])
   useEffect(() => {
     setDetail(null); setDetailError('')
     if (!selected) return
     const controller = new AbortController()
-    api<Village>(`/villages/${selected}?scenario_id=${scenario}`, undefined, controller.signal).then(setDetail).catch(() => { if (!controller.signal.aborted) setDetailError('Village details unavailable. Select again or retry.') })
+    api<Village>(`/villages/${selected}?scenario_id=${scenario}`, undefined, controller.signal).then(result => { if (!controller.signal.aborted) setDetail(result) }).catch(() => { if (!controller.signal.aborted) setDetailError('Village details unavailable. Select again or retry.') })
     return () => controller.abort()
   }, [selected, scenario, retry])
   const preset = metadata?.rainfall_scenarios.find(p => p.id === scenario)

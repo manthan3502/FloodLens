@@ -98,3 +98,13 @@ Built `backend/app/services/priority_service.py` and `frontend/src/components/Pr
 3. **Why not add historical severity?** It already contributes to susceptibility; adding it again would double-count it.
 4. **What happens on ties or too many teams?** Stable village IDs break ties; oversized requests return all villages.
 5. **How are missing population values treated?** They stay visibly unknown; ranking uses the study median (or neutral 0.5 when everything is unknown), never an assumed zero.
+
+## M6 — Integration
+
+Connected and verified the complete scenario→score→map→priority→detail flow. `scripts/verify-integration.cjs` uses Playwright against the real PostGIS/API stack and delays selected responses deliberately. AbortController and explicit guards keep old responses from changing the current screen.
+
+1. **Unit vs integration tests?** Unit tests isolate a function; integration tests exercise connected components and real requests.
+2. **What is a race here?** An older slow scenario response could arrive after a newer selection and overwrite it.
+3. **How is it prevented?** Abort superseded requests, check cancellation before updates, and debounce team changes.
+4. **What does the demo request path do?** React sends a preset, FastAPI scores real grid features, aggregates villages, ranks population/risk, and React updates colors and outlines.
+5. **Why test delayed responses?** Fast local requests can hide synchronization failures that appear on a slower deployment.
