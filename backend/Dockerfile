@@ -1,7 +1,7 @@
 FROM python:3.12-slim
 WORKDIR /work
-COPY backend/requirements.txt /tmp/requirements.txt
-RUN pip install --no-cache-dir -r /tmp/requirements.txt
+COPY backend/requirements-lock.txt /tmp/requirements-lock.txt
+RUN pip install --no-cache-dir -r /tmp/requirements-lock.txt
 COPY backend /work/backend
 COPY data_pipeline /work/data_pipeline
 COPY data/processed /work/data/processed

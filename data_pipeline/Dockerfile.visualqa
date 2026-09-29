@@ -1,6 +1,6 @@
 FROM python:3.12-slim
 RUN apt-get update && apt-get install -y --no-install-recommends libexpat1 && rm -rf /var/lib/apt/lists/*
-RUN pip install --no-cache-dir matplotlib==3.11.2 geopandas==1.2.0 rasterio==1.5.1 httpx==0.28.1
+COPY requirements-lock.txt /tmp/requirements-lock.txt
+RUN pip install --no-cache-dir -r /tmp/requirements-lock.txt
 WORKDIR /work
-RUN pip install --no-cache-dir pytest==9.0.2 pg8000==1.31.5 black==26.3.1 ruff==0.15.7
 CMD ["python", "-m", "data_pipeline.inspect_masks"]

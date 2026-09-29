@@ -1,0 +1,12 @@
+CREATE EXTENSION IF NOT EXISTS postgis;
+CREATE TABLE IF NOT EXISTS districts (id text PRIMARY KEY, name text NOT NULL, geom geometry(MultiPolygon,32643) NOT NULL);
+CREATE TABLE IF NOT EXISTS villages (id text PRIMARY KEY, district_id text NOT NULL REFERENCES districts(id), name text NOT NULL, tehsil text NOT NULL, source text NOT NULL, population_estimate double precision CHECK(population_estimate>=0), geom geometry(MultiPolygon,32643) NOT NULL);
+CREATE INDEX IF NOT EXISTS villages_geom_idx ON villages USING gist(geom);
+CREATE TABLE IF NOT EXISTS grid_cells (id text PRIMARY KEY, village_id text REFERENCES villages(id), elevation double precision, slope double precision, dist_to_river double precision, dist_to_road double precision, population double precision CHECK(population>=0), geom geometry(Polygon,32643) NOT NULL);
+CREATE INDEX IF NOT EXISTS grid_geom_idx ON grid_cells USING gist(geom);
+CREATE TABLE IF NOT EXISTS grid_village_parts (grid_cell_id text REFERENCES grid_cells(id), village_id text REFERENCES villages(id), area_m2 double precision NOT NULL CHECK(area_m2>0), PRIMARY KEY(grid_cell_id,village_id));
+CREATE TABLE IF NOT EXISTS historical_flood_events (id integer PRIMARY KEY, event_name text NOT NULL, event_date date NOT NULL, source_method text NOT NULL, mask_reference text NOT NULL);
+CREATE TABLE IF NOT EXISTS grid_flood_evidence (grid_cell_id text REFERENCES grid_cells(id), event_id integer REFERENCES historical_flood_events(id), flooded boolean, flood_fraction double precision, coverage_fraction double precision NOT NULL, PRIMARY KEY(grid_cell_id,event_id));
+CREATE TABLE IF NOT EXISTS rainfall_scenarios (id text PRIMARY KEY, name text NOT NULL, rainfall_24h_mm double precision NOT NULL CHECK(rainfall_24h_mm>=0), rainfall_72h_mm double precision NOT NULL CHECK(rainfall_72h_mm>=rainfall_24h_mm));
+CREATE TABLE IF NOT EXISTS waterways (id text PRIMARY KEY, name text, geom geometry(LineString,32643) NOT NULL);
+CREATE INDEX IF NOT EXISTS waterways_geom_idx ON waterways USING gist(geom);

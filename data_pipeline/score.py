@@ -99,6 +99,7 @@ def main():
             ),
         )
         conn.commit()
+    (ROOT / "docs/evidence").mkdir(parents=True, exist_ok=True)
     (ROOT / "docs/evidence/m2-scoring.json").write_text(
         json.dumps(evidence, indent=2), encoding="utf-8"
     )

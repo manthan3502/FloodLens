@@ -1,5 +1,6 @@
 """FloodLens API foundation. Data endpoints are introduced in milestone M3."""
 
+import json
 import logging
 import os
 import time
@@ -13,6 +14,13 @@ from starlette.exceptions import HTTPException
 from app.api.routes import router
 
 app = FastAPI(title="FloodLens", version="0.1.0")
+if os.getenv("ENV") == "production":
+    configured_origins = os.getenv("CORS_ALLOWED_ORIGINS", "")
+    if not configured_origins or any(
+        not origin.strip().startswith("https://")
+        for origin in configured_origins.split(",")
+    ):
+        raise RuntimeError("Production requires explicit HTTPS CORS origins")
 app.include_router(router)
 logger = logging.getLogger("floodlens")
 
@@ -64,12 +72,13 @@ async def request_log(request, call_next):
             },
         )
     logger.info(
-        "request",
-        extra={
-            "path": request.url.path,
-            "status": response.status_code,
-            "latency_ms": round((time.perf_counter() - started) * 1000, 2),
-        },
+        json.dumps(
+            {
+                "path": request.url.path,
+                "status": response.status_code,
+                "latency_ms": round((time.perf_counter() - started) * 1000, 2),
+            }
+        )
     )
     return response
 

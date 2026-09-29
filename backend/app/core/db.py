@@ -1,10 +1,12 @@
 """Small connection pool; credentials are supplied through the environment."""
 
 import os
+import ssl
 from functools import lru_cache
 from pathlib import Path
 
 from sqlalchemy import create_engine, text
+from sqlalchemy.engine import make_url
 
 
 def database_url():
@@ -40,8 +42,19 @@ def database_url():
 
 @lru_cache
 def engine():
+    url = make_url(database_url())
+    secure = os.getenv("ENV") == "production" or url.query.get("sslmode") in {
+        "require",
+        "verify-full",
+        "verify-ca",
+    }
+    url = url.difference_update_query(["sslmode"])
     return create_engine(
-        database_url(), pool_pre_ping=True, pool_size=3, max_overflow=2
+        url,
+        pool_pre_ping=True,
+        pool_size=3,
+        max_overflow=2,
+        connect_args={"ssl_context": ssl.create_default_context()} if secure else {},
     )
 
 

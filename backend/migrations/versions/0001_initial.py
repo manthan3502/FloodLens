@@ -11,8 +11,7 @@ depends_on = None
 
 
 def upgrade():
-    root = Path(__file__).resolve().parents[3]
-    for statement in (root / "data_pipeline/schema.sql").read_text().split(";"):
+    for statement in Path(__file__).with_name("0001_schema.sql").read_text().split(";"):
         if statement.strip():
             op.execute(statement)
     op.execute(

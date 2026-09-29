@@ -4,8 +4,9 @@ import gzip
 import json
 import math
 import os
+import ssl
 from contextlib import closing
-from urllib.parse import unquote, urlparse
+from urllib.parse import parse_qs, unquote, urlparse
 
 import pg8000.dbapi
 
@@ -37,6 +38,13 @@ def connect():
         host=url.hostname,
         port=url.port or 5432,
         database=url.path.lstrip("/"),
+        ssl_context=(
+            ssl.create_default_context()
+            if os.getenv("ENV") == "production"
+            or parse_qs(url.query).get("sslmode", [None])[0]
+            in {"require", "verify-full", "verify-ca"}
+            else None
+        ),
     )
 
 
