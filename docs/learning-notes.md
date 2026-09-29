@@ -100,6 +100,7 @@ Built `backend/app/services/priority_service.py` and `frontend/src/components/Pr
 5. **How are missing population values treated?** They stay visibly unknown; ranking uses the study median (or neutral 0.5 when everything is unknown), never an assumed zero.
 
 ## M6 — Integration
+ 
 
 Connected and verified the complete scenario→score→map→priority→detail flow. `scripts/verify-integration.cjs` uses Playwright against the real PostGIS/API stack and delays selected responses deliberately. AbortController and explicit guards keep old responses from changing the current screen.
 
@@ -108,3 +109,13 @@ Connected and verified the complete scenario→score→map→priority→detail f
 3. **How is it prevented?** Abort superseded requests, check cancellation before updates, and debounce team changes.
 4. **What does the demo request path do?** React sends a preset, FastAPI scores real grid features, aggregates villages, ranks population/risk, and React updates colors and outlines.
 5. **Why test delayed responses?** Fast local requests can hide synchronization failures that appear on a slower deployment.
+
+## M7 — Reproducibility and hardening
+
+Pinned dependencies, versioned migration SQL, enforced production TLS/CORS, and tested a literal fresh GitHub clone with its own database. Key files: `backend/Dockerfile`, `backend/requirements-lock.txt`, `docs/local-development.md`, `.github/workflows/test.yml`. Docker isolates the runtime; Alembic creates schema; CI uses real PostGIS.
+
+1. **Why isn't works-on-my-machine enough?** Hidden files, installed packages and old database tables can conceal missing setup steps.
+2. **What proved reproducibility?** A fresh clone and empty volume restored the seed, scored it and passed browser/API tests.
+3. **What does TLS protect?** Database traffic is encrypted and the server certificate/hostname is verified.
+4. **Why explicit CORS origins?** Browsers should only expose API responses to the configured frontend origins; CORS is not user authentication.
+5. **Does a warning mean a skipped test?** No. All 52 tests passed; two upstream deprecations are recorded for future dependency maintenance.

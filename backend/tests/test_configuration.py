@@ -2,6 +2,7 @@ import os
 import ssl
 import subprocess
 import sys
+from pathlib import Path
 
 from app.core import db
 
@@ -29,6 +30,7 @@ def test_production_rejects_unconfigured_or_http_cors():
     env = os.environ | {
         "ENV": "production",
         "CORS_ALLOWED_ORIGINS": "http://localhost:5173",
+        "PYTHONPATH": str(Path(__file__).resolve().parents[1]),
     }
     result = subprocess.run(
         [sys.executable, "-c", "import app.main"], env=env, capture_output=True

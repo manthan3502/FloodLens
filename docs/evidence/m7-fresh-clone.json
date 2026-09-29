@@ -1,0 +1,11 @@
+{
+  "source": "literal GitHub clone b06cdbd",
+  "database": "new floodlens-check volume",
+  "frontend_port": 5174,
+  "api_port": 8001,
+  "seed_villages": 380,
+  "scenario_priority_detail": "passed",
+  "backend_tests": 42,
+  "frontend_tests": 6,
+  "errors": []
+}
