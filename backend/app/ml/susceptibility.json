@@ -1,0 +1,9 @@
+{
+  "version": "index-v1",
+  "weights": {"elevation": 0.25, "river_proximity": 0.30, "slope": 0.10, "historical_evidence": 0.15, "rainfall": 0.20},
+  "river_decay_metres": 1500.0,
+  "slope_cap_degrees": 10.0,
+  "rainfall_24h_reference_mm": 53.34,
+  "rainfall_72h_reference_mm": 140.52,
+  "unknown_history_value": 0.5
+}

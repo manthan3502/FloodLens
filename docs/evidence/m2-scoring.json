@@ -1,0 +1,44 @@
+{
+  "gate_b": "GO WITH REDUCED SCOPE",
+  "model_type": "susceptibility_index",
+  "cells": 38083,
+  "elevation_bounds_5_95": [
+    539.265625,
+    759.1750122070315
+  ],
+  "history_unknown_cells": 1515,
+  "scenarios": {
+    "extreme": {
+      "categories": {
+        "Medium": 11441,
+        "High": 21293,
+        "Critical": 4530,
+        "Low": 819
+      },
+      "min": 0.20244165928824165,
+      "max": 0.9235882866033378,
+      "deterministic_sha256": "37f366300de4bd89fb0ea97f58b7c806e69006ff2347d86bb32e67321d9afbf7"
+    },
+    "heavy": {
+      "categories": {
+        "Medium": 18677,
+        "Low": 3090,
+        "High": 15450,
+        "Critical": 866
+      },
+      "min": 0.11399324960503701,
+      "max": 0.8351398769201331,
+      "deterministic_sha256": "0a7288ce5a984473b77a12c495276dcfd1ea6722e5b305cc74a350dbdaf24e35"
+    },
+    "normal": {
+      "categories": {
+        "Medium": 23106,
+        "Low": 6246,
+        "High": 8731
+      },
+      "min": 0.01898546556523243,
+      "max": 0.7401320928803286,
+      "deterministic_sha256": "14762d2215951f0c4d60dda2eb5915dd18fcde86ce18bedb9f0667fc4fdc285f"
+    }
+  }
+}

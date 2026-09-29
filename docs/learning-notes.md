@@ -57,4 +57,14 @@ Docker now runs the real PostGIS database. We tested coordinate conversion into 
 
 Earth Engine project registration establishes an eligible project; OAuth consent gives this particular local client permission to act as your account. Both are necessary. A project ID is not a credential.
 
-Repeated village IDs sometimes represent separate pieces of the same settlement. The named repeated IDs here have matching names; M1 can dissolve these shapes into one multipart geometry. Blank names with truncated codes cannot be treated as known villages. The 397 raw polygons represent 380 named settlements plus nine unnamed polygons after combining repeated named pieces.
+Repeated village IDs sometimes represent separate pieces of the same settlement. The named repeated IDs here have matching names; M1 dissolved these shapes into multipart geometry. Blank names with truncated codes cannot be treated as known villages. The 397 raw polygons represent 380 named settlements plus nine unnamed polygons after combining repeated named pieces.
+
+## M2 — Susceptibility scoring
+
+Built a deterministic five-factor index because the SAR dates and coverage cannot support defensible supervised validation. Key files: `backend/app/ml/susceptibility.py`, its JSON config, `data_pipeline/score.py`, and `docs/methodology.md`. Standard Python math implements the formula; pg8000 reads and stores PostGIS rows; pytest checks missing values, bounds and repeatability.
+
+1. **Why no Random Forest?** Sparse 2019 and early 2021 masks are weak labels; fitting them would not establish accurate flood prediction.
+2. **Is 0.7 a 70% flood chance?** No. It is a relative index formed from weighted normalized factors.
+3. **What is spatial leakage?** Nearby cells share terrain and observations; a random split can make performance look better than geographic holdouts.
+4. **What do PR-AUC and temporal holdout mean?** PR-AUC summarizes precision/recall for rare positives. Temporal holdout tests a different event. Neither is claimed here because usable independent labels are missing.
+5. **How are unknowns handled?** Required terrain features fail loudly if missing; unknown historical evidence is explicitly assigned neutral 0.5 and flagged. Population stays null and is excluded from susceptibility.
