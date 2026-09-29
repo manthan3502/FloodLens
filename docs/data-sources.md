@@ -1,43 +1,29 @@
-# Data-source audit — Gate A GO WITH REDUCED SCOPE
+# Data sources and provenance
 
-## M1 processed sources (supersedes outstanding M0 tasks below)
+Gate A: GO WITH REDUCED SCOPE. M1 processed real inputs; Gate B chose the index fallback because SAR evidence cannot support defensible supervised validation. Earlier access failures and source alternatives remain recorded under `docs/evidence/gate-a-*.json` and M0's milestone record.
 
-All 51 raster downloads passed SHA-256 verification. Full manifests are `m1-raster-downloads.json` and the two `m1-sentinel-*-sources.json` files. SRTM elevation/slope and Sentinel-1 VV are processed on aligned 30 m UTM grids. WorldPop retains native population pixels so reprojection cannot multiply people. Observed population sums conserve exactly at 2,470,371.0796; nine villages remain unknown. Source vintages differ and these are estimates.
-
-DataMeet named pieces dissolve to 380 settlements; nine unnamed pieces are quarantined. Actual OSM extraction used its map API after Overpass failures, with cached bounded tiles and subdivision; 95 waterways and 1,897 major-road ways. Rainfall presets use pooled June–September 2015–2024 daily and rolling-three-day reanalysis quantiles (50/95/99), checked alongside retained 2019/2021 event samples. Normal is 3.70/13.50 mm; Heavy 29.70/78.51; Extreme 53.34/140.52. These are comparative scenario inputs, not forecasts or return periods.
-
-SAR 2019 covers 5.933% of the rasterized study area; 2021 covers it but uses a single 22 July acquisition. [PIB's 25 July 2021 report](https://www.pib.gov.in/Pressreleaseshare.aspx?PRID=1738743&lang=2&reg=48) supports the affected-tehsil plausibility check only. The masks are not peak inundation or independently validated labels. See M1's inspection image and recorded exceptions.
-
-## Final M0 selection (2026-09-29 IST)
-
-Authenticated GEE access and actual GeoTIFF clips passed. Use SRTM `USGS/SRTMGL1_003`; use the `population` band from [WorldPop constrained 2020](https://developers.google.com/earth-engine/datasets/catalog/WorldPop_GP_100m_pop_age_sex_cons_unadj), filtered to India. The catalog describes it as UN-adjusted; keep that qualification in population outputs. Actual clips and nodata handling are recorded in `gee-raster-clips.json`. This avoids the stalled country download without substituting the unconstrained GP product.
-
-2019 event-window SAR is missing at four sample points; July 2021 is accessible. Full scene inventory is recorded; M1 carries missing evidence into Gate B under the approved weak-label path. Both events must remain distinguishable, with missing data explicitly unknown. Earlier rows below retain the chronological access findings; they are superseded by this selection.
-
-The final PRD defines candidates; the reports in `docs/evidence/` record actual requests, hashes and failures. Raw downloads are ignored. No production features have been derived.
-
-| Source | Actual M0 result | Remaining work |
+| Source | Exact product/access | Actual use and limits |
 |---|---|---|
-| [DataMeet Maharashtra](https://github.com/datameet/indian_village_boundaries/tree/master/mh) | Both files downloaded; 397 valid, nonempty, nonduplicate target polygons | Census-code reconciliation; Hatkanangale independent coverage reference |
-| [IIT Bombay Census-linked maps](https://www.cse.iitb.ac.in/~pocra/MahaCensus_shapefile_data1.2/MaharashtraCensus.html) | Kolhapur village and district/tehsil archives downloaded | Coverage, geometry and reuse terms; candidate derives partly from DataMeet, so it is not independent validation |
-| [Open-Meteo archive](https://open-meteo.com/en/docs/historical-weather-api) | 2019-08-01–15: 15 daily values, no nulls, 407.2 mm total; 2021-07-15–31: 17 daily values, no nulls, 267.8 mm total at requested 16.7°N, 74.25°E | Probe all tehsils and calibrate scenarios in M1; these totals describe different windows, not comparable event severity |
-| [OpenTopography SRTM](https://portal.opentopography.org/API/globaldem) | Actual clip request returned HTTP 401 | Requires API key; GEE access pending. Approved Copernicus GLO-30 fallback returned 1,024 sample pixels (550.86–577.09 m) |
-| [Earth Engine](https://developers.google.com/earth-engine/guides/auth) | Registered project `floodlens-510018` supplied; local client still returns authorization-required error on 2026-09-29 IST | Complete the running localhost:8085 Google consent flow, then actual per-tehsil SRTM and Sentinel-1 queries |
-| [WorldPop constrained 2020 India](https://data.worldpop.org/GIS/Population/Global_2000_2020_Constrained/2020/BSGM/IND/) | Catalogue fetched; remote raster window failed because server did not support range access | Download/clip real raster; do not substitute GEE unconstrained population silently |
-| [OSM Overpass](https://overpass-api.de/api/interpreter) / [OSM map API](https://api.openstreetmap.org/api/0.6/map) | Overpass GET 406 and POST timeouts. Direct map samples succeeded: Karvir 6 river/stream ways and 67 major-road ways; Panhala 0/11; Hatkanangale 0/10; Shirol 1/23 | Samples are small boxes, not full tehsils. Zero waterways in one sample does not establish source absence |
+| DataMeet | [Maharashtra village files](https://github.com/datameet/indian_village_boundaries/tree/master/mh), `mh1.geojson` and `mh2.geojson` | 397 valid pieces in four tehsils; dissolve named Census-code pieces to 380 units; quarantine nine unnamed pieces. `Hatkalangale` spelling normalized. Mixed vintage, includes towns. ODbL attribution required. |
+| IIT Bombay | [Census-linked Maharashtra GIS portal](https://www.cse.iitb.ac.in/~pocra/MahaCensus_shapefile_data1.2/MaharashtraCensus.html) | Candidate reference only. Available tehsil comparisons exceed 99% coverage; Hatkanangale omitted in reference archive. Partly derives from DataMeet, so not independent certification. |
+| SRTM | GEE [`USGS/SRTMGL1_003`](https://developers.google.com/earth-engine/datasets/catalog/USGS_SRTMGL1_003) | 30 m elevation/slope; EPSG:32643 processing. SRTM public-domain source terrain is not current drainage/bathymetry. |
+| Sentinel-1 | GEE [`COPERNICUS/S1_GRD`](https://developers.google.com/earth-engine/datasets/catalog/COPERNICUS_S1_GRD) | VV, descending orbit 136, before/during composites, linear-power filtering and Otsu change with slope/water screens. Copernicus terms. 2019 coverage 5.933%; 2021 single 22 July scene. Not official or peak flood extents. |
+| WorldPop | GEE [`WorldPop/GP/100m/pop_age_sex_cons_unadj`](https://developers.google.com/earth-engine/datasets/catalog/WorldPop_GP_100m_pop_age_sex_cons_unadj), India 2020, `population` band | Catalog describes constrained, UN-adjusted estimates. Native pixel counts preserved; no count-multiplying resampling. CC BY 4.0. Nine village totals unknown. |
+| OSM | [Map API](https://api.openstreetmap.org/api/0.6/map), fallback after Overpass failures | 57 bounded parent extracts, with dense tiles subdivided at 50,000-node limit; 95 river/stream ways and 1,897 primary/secondary/tertiary road ways, deduplicated by OSM ID. © OpenStreetMap contributors, ODbL. Rural completeness varies. |
+| Open-Meteo | [Historical Archive API](https://open-meteo.com/en/docs/historical-weather-api), `archive-api.open-meteo.com/v1/archive` | Reanalysis point samples for four tehsils, 2019/2021 event windows plus June–September 2015–2024 climatology. Attribution/provider terms apply. Modeled coarse rainfall, not gauges or forecasts. |
 
-## Boundary findings
+## Processed outputs
 
-The resumed identifier audit distinguishes repeated pieces of named settlements from missing labels. Named unique counts are Hatkanangale 63, Karvir 130, Panhala 131, Shirol 56 (380 total). Nine unnamed polygons remain (one, four, four, zero respectively). Repeated named Census codes have no conflicting names. See `boundary-identifiers.json`; named pieces can be dissolved in M1 without discarding them as duplicate villages.
+51 GeoTIFF downloads passed SHA-256 verification (`m1-raster-downloads.json`). Source scene IDs/dates are in `m1-sentinel-2019-sources.json` and `m1-sentinel-2021-sources.json`. Raw/intermediate files remain ignored. Native WorldPop pixel ownership is assigned once in village overlaps by stable ID; observed village and grid sums conserve at 2,470,371.0796. Zero conservation error is a processing check, not confirmation of population accuracy.
 
-All four tehsil sample points now have real rainfall responses for both 2019 and 2021 windows, with no missing daily values. URLs, hashes and totals are in `rainfall-tehsil-probes.json`. These are point-grid feasibility samples, not yet calibrated scenario presets.
+The 250 m grid has 38,083 cells and 47,843 exact village intersections. Distances/areas are metres in EPSG:32643; web GeoJSON is EPSG:4326. All named source polygons passed validation. Nine unnamed pieces remain outside displayed coverage; no names were invented and no project-wide grid-cluster fallback was needed.
 
-DataMeet spells Hatkanangale `Hatkalangale`. Counts: Karvir 136, Panhala 137, Hatkanangale 68, Shirol 56. All 397 shapes passed validity checks. Census 2001 identifiers are nonunique in three tehsils. The IITB reference archive omits Hatkanangale, so full coverage there is unverified. Coverage against available references exceeds 99% for the other three (`tehsil-coverage.json`). No fallback is justified by a spelling difference or missing reference alone.
+Presets use pooled daily and rolling-three-day 50th/95th/99th percentiles from 4,880 monsoon daily values: Normal 3.70/13.50 mm, Heavy 29.70/78.51, Extreme 53.34/140.52 (24h/72h). They are comparative inputs, not return periods. Event-window context remains in `rainfall-tehsil-probes.json`.
 
-After remote range reads failed, a full WorldPop download was attempted. The slow transfer was interrupted after about 57 MB; incomplete bytes are retained as `.partial` in ignored raw storage and never treated as a usable raster. A complete local download or authenticated approved source remains necessary.
+## SAR plausibility and limitations
 
-## Source distinctions
+[PIB's 25 July 2021 response report](https://www.pib.gov.in/Pressreleaseshare.aspx?PRID=1738743&lang=2&reg=48) and [NDRF reporting](https://www.ndrf.gov.in/en/pressrelease/rescue-releif-work-ndrf-maharashtra) identify affected areas, not pixel-level ground truth. The visual check shows river-adjacent changes in Shirol. Missing 2019 coverage and 2021 acquisition timing prevent claiming complete historical extent. See `m1-sar-inspection.png`, `m1-feature-summary.json`, `m1-validation.json` and the methodology.
 
-DataMeet indicates ODbL. OSM attribution and ODbL obligations must be preserved. WorldPop's exact selected product and license must be documented with the processed artifact. IIT Bombay identifies tentative village boundaries, Census attributes and missing geometries; its download is not a certification of completeness.
+## Redistribution
 
-The planned analysis uses metres in EPSG:32643. M0 probes use small samples or a provisional broad bounding box only; neither defines the final four-tehsil boundary.
+`data/processed/seed.json.gz` is a compact source-derived database artifact. Retain source attribution and applicable ODbL/CC BY terms when redistributing data; the MIT software license does not override them. No OAuth tokens, database credentials or large raw imagery belong in the repository.

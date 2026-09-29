@@ -38,4 +38,3 @@ test('methodology and historical limitations are accessible', async () => {
   expect(screen.getByText(/Dashed borders:/)).toBeTruthy()
   await screen.findByRole('button', { name: 'Select test village' })
 })
-

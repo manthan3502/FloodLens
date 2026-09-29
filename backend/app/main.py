@@ -23,6 +23,11 @@ if os.getenv("ENV") == "production":
         raise RuntimeError("Production requires explicit HTTPS CORS origins")
 app.include_router(router)
 logger = logging.getLogger("floodlens")
+logger.setLevel(logging.INFO)
+if not logger.handlers:
+    handler = logging.StreamHandler()
+    handler.setFormatter(logging.Formatter("%(message)s"))
+    logger.addHandler(handler)
 
 
 @app.exception_handler(RequestValidationError)
@@ -61,7 +66,7 @@ async def request_log(request, call_next):
     try:
         response = await call_next(request)
     except Exception:
-        logger.error("request_failed", extra={"path": request.url.path})
+        logger.error(json.dumps({"event": "request_failed", "path": request.url.path}))
         response = JSONResponse(
             status_code=503,
             content={

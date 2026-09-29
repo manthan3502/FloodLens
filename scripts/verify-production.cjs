@@ -1,0 +1,32 @@
+// Cold-browser production check. Requires real HTTPS deployment URLs.
+const { chromium } = require(process.env.PLAYWRIGHT_MODULE || 'playwright');
+const fs = require('node:fs');
+const assert = require('node:assert/strict');
+const appUrl = process.env.APP_URL;
+const apiUrl = process.env.API_BASE_URL;
+if (!appUrl?.startsWith('https://') || !apiUrl?.startsWith('https://')) throw new Error('Set actual HTTPS APP_URL and API_BASE_URL');
+(async () => {
+  const browser = await chromium.launch({ channel: 'msedge', headless: true });
+  const page = await browser.newPage({ viewport: { width: 1440, height: 1000 } });
+  page.setDefaultTimeout(90000);
+  const errors = []; page.on('pageerror', e => errors.push(e.message));
+  const started = Date.now();
+  await page.goto(appUrl);
+  await page.locator('.leaflet-overlay-pane path[fill-opacity="0.65"]').first().waitFor();
+  assert.equal(await page.locator('.leaflet-overlay-pane path[fill-opacity="0.65"]').count(), 380);
+  await page.getByLabel('Rainfall scenario').selectOption('extreme');
+  await page.getByLabel('Available response teams').fill('5');
+  await page.waitForFunction(() => document.querySelectorAll('.priorities li').length === 5);
+  await page.getByLabel('Available response teams').fill('3');
+  await page.waitForFunction(() => document.querySelectorAll('.priorities li').length === 3);
+  await page.locator('.priorities button').first().click();
+  await page.getByLabel('Village detail', { exact: true }).waitFor();
+  const response = await page.request.post(`${apiUrl}/priorities/calculate`, { data: { scenario_id: 'extreme', available_teams: 3 } });
+  assert.equal(response.status(), 200);
+  const expected = await response.json();
+  assert.deepEqual(await page.locator('.priorities button').evaluateAll(nodes => nodes.map(n => n.dataset.villageId)), expected.map(v => v.id));
+  assert.deepEqual(errors, []);
+  await page.screenshot({ path: 'docs/evidence/production-dashboard.png', fullPage: true });
+  fs.writeFileSync('docs/evidence/production-smoke.json', JSON.stringify({ appUrl, apiUrl, cold_browser: true, elapsed_ms: Date.now() - started, villages: 380, latest_priority_ids: expected.map(v => v.id), errors }, null, 2));
+  await browser.close();
+})().catch(error => { console.error(error); process.exit(1); });

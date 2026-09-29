@@ -1,15 +1,32 @@
 # Architecture
 
-## M3 runtime
+```mermaid
+flowchart TB
+  sources[Earth Engine / OSM / Open-Meteo / DataMeet] --> pipeline[Offline ingestion, grid, extraction, validation]
+  pipeline --> seed[Compact source-derived seed]
+  seed --> db[(PostGIS)]
+  browser[React / Leaflet dashboard] --> api[FastAPI]
+  api --> snapshot[Cached immutable grid features and exact intersections]
+  snapshot --> db
+  snapshot --> index[Five-factor susceptibility index]
+  index --> aggregate[Area-weighted village scores]
+  aggregate --> priority[65/35 risk and population priority]
+  aggregate --> browser
+  priority --> browser
+```
 
-`docker compose` runs PostGIS and FastAPI. `app/core/db.py` supplies a bounded SQLAlchemy/pg8000 pool; Alembic versions the schema. `app/services/risk_service.py` caches the immutable feature snapshot, computes the selected index scenario and area-weights exact grid intersections. GeoJSON is transformed to EPSG:4326 and simplified by 15 m with topology preserved. Dataset updates require an API restart. Model metadata contains the index configuration and null ML metrics. Consistent errors and request timing surround the routers.
+## Spatial processing
 
-Approved design: React/Leaflet → FastAPI → PostgreSQL/PostGIS. Offline Python processing prepares spatial features before deployment. Runtime requests apply a cheap rainfall-scenario adjustment and deterministic priority ranking.
+Distances and areas use EPSG:32643. The regular 250 m grid contains 38,083 cells; 47,843 exact cell–village intersections preserve aggregation weights. Source-derived rasters/intermediates stay offline and ignored. The 3.9 MB seed restores 380 source settlements and related feature/evidence tables without Earth Engine access. Village GeoJSON is simplified by 15 m with topology preserved, converted to MultiPolygon and transformed to EPSG:4326.
 
-## M0 implementation
+## Runtime
 
-`backend/app/main.py` serves liveness only and allows the configured frontend origins. `/health` does not test database readiness. `frontend/src/App.tsx` displays the base map and an explicit data-pending state. `docker-compose.yml` defines PostGIS, persistent storage, a health check and a localhost-only database port.
+FastAPI routers validate preset and team inputs. SQLAlchemy/pg8000 supplies a bounded pool. The risk service caches the fixed offline features, calls index-v1 per scenario and aggregates contributions and raw factors by intersection area. Restart workers after refreshing data. Priorities are computed on demand from current scores and database-stored weights; no stale priority-results table exists. Road accessibility is display context only.
 
-M1 has populated PostGIS feature tables and a compact versioned seed. The grid–village intersection table preserves exact weights for future village aggregation. Offline modules under `data_pipeline/` ingest, extract, validate and load these features. Linux Docker runs scientific verification where Windows Application Control blocks binary extensions. There are no data endpoints, risk models or priority services yet; those belong to M2–M5.
+React owns scenario, selected village and ranking state. AbortController and guarded updates discard superseded responses; team requests are debounced. Leaflet displays actual API polygons, river lines and priority outlines. Error/loading states cover unavailable or stale map data. Historical highlighting summarizes villages with observed SAR change and is explicitly not an extent boundary.
 
-The analysis CRS will be EPSG:32643 for metre-based distances and areas; map responses will use longitude/latitude GeoJSON. Village polygons are preferred where evidence confirms usable coverage. No fallback has yet been selected.
+## Reproducibility and deployment
+
+Docker Compose runs local PostGIS and FastAPI; Vite serves frontend development. Alembic versions immutable schema changes. Production preparation uses Vercel frontend → Render Docker API → Supabase PostGIS. Startup initializes an empty database, then serves the read-mostly app. Production CORS requires explicit HTTPS origins; database TLS verifies certificates. Database row-level security prevents anonymous managed-data-API access. Secrets never enter the frontend.
+
+The full pipeline runs in a Linux container where Windows compiled scientific libraries are blocked by host Application Control. The policy was not changed. Automated tests use small fixtures plus real seeded PostGIS. The fresh-clone check used an independent volume and ports.

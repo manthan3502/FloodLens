@@ -1,13 +1,13 @@
-# Current limitations
+# Limitations
 
-M1 now has real processed features and a verified PostGIS seed. SAR 2019 coverage is 5.933%; 2021's 22 July scene predates documented 25 July rescue operations. Sparse detected change is not an estimate of complete historical inundation. Nine villages have unknown WorldPop totals; other totals sum observed constrained pixels only. Nine unnamed source boundary pieces are omitted and preserved for review. The current frontend remains the M0 preview until M4. Older M0 access findings below are historical context.
-
-- M0 passed with reduced scope: Docker/PostGIS and Earth Engine now work. 2019 event-window SAR coverage is absent at four sample points; unknown observations must never become dry labels. M1 will audit full masks before Gate B.
-- The selected population input is constrained 2020 WorldPop from GEE (`pop_age_sex_cons_unadj`, population band), UN-adjusted per its catalog. Nine source polygons lack settlement names; Hatkanangale lacks an independent tehsil reference in the downloaded IITB archive.
-- The current map is a study-area preview with no flood overlay, scores, population estimates or rankings.
-- Dataset availability is being tested. A successful catalogue request does not establish raster usability or spatial coverage.
-- No scientific validation, prediction accuracy or lives-saved claim is supported.
-
-## Limitations to preserve in the finished product
-
-SAR flood masks are remotely derived proxies for selected events, not official incident records. Reanalysis rainfall is not a gauge reading. Population exposure is modeled, not a census headcount. Village geometries may have gaps; fallback decisions must be recorded by tehsil. Priority weights are prototype choices. The application is not validated for operational evacuation decisions.
+- This is an academic decision-support prototype. No official warning, safe route, flood depth, event probability, lives-saved claim or operational validation is supported.
+- Historical SAR is a change proxy: 2019 covers 5.933% of the study area; 2021 uses 22 July imagery before documented 25 July response. Missing observations are never dry labels. No ML metrics exist.
+- Index weights, river decay, slope cap and category bands are reasoned prototype assumptions. Absolute elevation is not height above the nearest drainage. A neutral historical value is used where coverage is inadequate.
+- Rainfall presets are pooled reanalysis quantiles from four sample points, applied uniformly. They are not live gauges, forecasts or return periods. Uniform rainfall can change category/score without changing relative priority order.
+- WorldPop constrained 2020 population is modeled and older than the processing date. Nine villages have no valid pixels and remain null. Other totals sum observed pixels; population is whole-village context, not a modeled count of people who will flood. Grid/village observed sums conserve exactly.
+- DataMeet boundaries have mixed vintage. Nine unnamed pieces are omitted and quarantined; Hatkanangale lacks an independent tehsil reference. Named multipart pieces were dissolved. The 380 units include municipal/town polygons, so this is a rural-focused study area rather than a rural-only census inventory. Larger towns can dominate population-aware rankings; no specialized urban flood model is implemented.
+- OSM rural streams/roads may be incomplete. Straight-line mean distance is not road travel time, passability, bridge condition or an evacuation route.
+- One team per ranked village is a deterministic greedy demonstration. Actual capacity, logistics and multiple resource types are outside scope. Accessibility never penalizes the score.
+- Offline feature snapshots are cached per API worker; restart after data refresh. Map simplification trades small boundary detail for responsiveness. Source-derived artifacts retain upstream licenses.
+- Basemap tiles require internet access. The app explicitly reports failed data requests; a tile-provider outage can leave polygons without a basemap.
+- Planned free deployment has cold starts and quotas. Public deployment and Gate D remain pending until cloud authentication and actual production verification succeed.

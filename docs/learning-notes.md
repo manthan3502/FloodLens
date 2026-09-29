@@ -100,7 +100,7 @@ Built `backend/app/services/priority_service.py` and `frontend/src/components/Pr
 5. **How are missing population values treated?** They stay visibly unknown; ranking uses the study median (or neutral 0.5 when everything is unknown), never an assumed zero.
 
 ## M6 — Integration
- 
+
 
 Connected and verified the complete scenario→score→map→priority→detail flow. `scripts/verify-integration.cjs` uses Playwright against the real PostGIS/API stack and delays selected responses deliberately. AbortController and explicit guards keep old responses from changing the current screen.
 
@@ -119,3 +119,13 @@ Pinned dependencies, versioned migration SQL, enforced production TLS/CORS, and 
 3. **What does TLS protect?** Database traffic is encrypted and the server certificate/hostname is verified.
 4. **Why explicit CORS origins?** Browsers should only expose API responses to the configured frontend origins; CORS is not user authentication.
 5. **Does a warning mean a skipped test?** No. All 52 tests passed; two upstream deprecations are recorded for future dependency maintenance.
+
+## M8 — Deployment preparation (production still pending)
+
+Prepared `render.yaml`, `frontend/vercel.json` and `scripts/deploy/start.py`. The startup script applies Alembic, loads the real seed only into an empty database, and starts FastAPI. Supabase stores durable PostGIS data; Vercel hosts static frontend files; Render runs Python. `docs/deployment.md` records current free-tier limitations. Cloud authentication and cold-browser production tests remain outstanding.
+
+1. **Why three hosts?** Static frontend delivery, Python execution and persistent spatial storage have different needs; the PRD uses simple managed services for each.
+2. **Why keep rasters offline?** The web app only needs compact processed features, reducing memory and deployment work.
+3. **What is a cold start?** A sleeping free API must start again before serving requests; the first load can be slow.
+4. **Why row-level security?** Managed databases can expose tables through an automatic API; no anonymous policies means the browser cannot write these tables.
+5. **Is deployment finished?** No. A tested local container and configuration files are preparation; only a working public URL and production smoke evidence satisfy Gate D.

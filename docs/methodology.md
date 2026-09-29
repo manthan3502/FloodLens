@@ -39,3 +39,7 @@ Categories: Low [0,.25), Medium [.25,.50), High [.50,.75), Critical [.75,1]. The
 ## Implemented priority normalization (M5)
 
 Risk is the existing [0,1] index. Population is `log1p(p)/log1p(max_known_study_population)`; the log transform limits domination by large settlements but preserves order. The study-wide denominator stays fixed across scenarios and team counts. Unknown p uses the known study median solely inside ranking, with the reported estimate still null and the rule returned explicitly. If all are unknown, use 0.5; if all known values are zero, use zero. Default weights 0.65/0.35 are read from `priority_weights_config`, never fit claims. Ties use ascending village ID. Top N is capped at the number of villages. Accessibility and historical evidence cannot add independent terms.
+
+## Arithmetic example (illustrative inputs, not an observed village)
+
+For a cell with elevation 550 m, slope 2°, river distance 200 m and historical fraction 0.2, under Normal rainfall (3.7/13.5 mm), the normalized terms are E=0.95118728, R=0.87517332, S=0.8, H=0.2, P=0.08271903. Weighted contributions are 0.23779682 + 0.26255200 + 0.08 + 0.03 + 0.01654381 = **0.62689262 (High)**. This worked example demonstrates the arithmetic using actual normalization bounds; it is not extra data or a validation result. For a village, multiply each intersecting cell score by its intersection area, sum, and divide by total intersection area before applying the category bands.
