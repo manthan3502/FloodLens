@@ -59,6 +59,16 @@ Earth Engine project registration establishes an eligible project; OAuth consent
 
 Repeated village IDs sometimes represent separate pieces of the same settlement. The named repeated IDs here have matching names; M1 dissolved these shapes into multipart geometry. Blank names with truncated codes cannot be treated as known villages. The 397 raw polygons represent 380 named settlements plus nine unnamed polygons after combining repeated named pieces.
 
+## M3 — PostGIS-backed API
+
+Built FastAPI routes, SQLAlchemy connections and Alembic migrations. The risk service joins exact cell–village intersection areas and calls the index. Key files: `backend/app/api/routes.py`, `services/risk_service.py`, `core/db.py`, `backend/migrations/`. FastAPI/Pydantic validates inputs, PostGIS prepares GeoJSON, and SQLAlchemy manages pooled connections.
+
+1. **What is GeoJSON?** A Feature pairs geometry with properties; a FeatureCollection contains those features. Web coordinates are longitude/latitude.
+2. **Why migrate the database?** Versioned schema changes make a fresh installation reproducible without manual table edits.
+3. **What do 422, 404 and 503 mean?** Invalid fields, missing object and temporarily unavailable data, respectively.
+4. **How does a scenario request work?** Validate its preset, score cached real grid features, area-weight into villages, then serialize the map and explanation fields.
+5. **Why cache features?** Offline data stays fixed between processing runs. Caching avoids repeated heavy reads; restart after a refresh so results cannot silently use stale features.
+
 ## M2 — Susceptibility scoring
 
 Built a deterministic five-factor index because the SAR dates and coverage cannot support defensible supervised validation. Key files: `backend/app/ml/susceptibility.py`, its JSON config, `data_pipeline/score.py`, and `docs/methodology.md`. Standard Python math implements the formula; pg8000 reads and stores PostGIS rows; pytest checks missing values, bounds and repeatability.

@@ -2,14 +2,12 @@
 
 import gzip
 import json
+import math
 import os
 from contextlib import closing
 from urllib.parse import unquote, urlparse
 
-import geopandas as gpd
-import numpy as np
 import pg8000.dbapi
-from shapely import MultiPolygon
 
 from data_pipeline.feasibility import ROOT
 
@@ -22,11 +20,13 @@ def database_url():
                 url = line.split("=", 1)[1]
     if not url:
         raise ValueError("DATABASE_URL is required")
-    return url.replace("postgresql+psycopg://", "postgresql://")
+    return url.replace("postgresql+psycopg://", "postgresql://").replace(
+        "postgresql+pg8000://", "postgresql://"
+    )
 
 
 def number(value):
-    return None if value is None or not np.isfinite(value) else float(value)
+    return None if value is None or not math.isfinite(value) else float(value)
 
 
 def connect():
@@ -41,6 +41,8 @@ def connect():
 
 
 def multi(geom):
+    from shapely import MultiPolygon
+
     return MultiPolygon([geom]) if geom.geom_type == "Polygon" else geom
 
 
@@ -60,6 +62,8 @@ def bulk_execute(cursor, sql, records):
 
 
 def main():
+    import geopandas as gpd
+
     folder = ROOT / "data/interim"
     villages = gpd.read_file(folder / "villages-features.gpkg")
     grid = gpd.read_file(folder / "grid-features.gpkg")

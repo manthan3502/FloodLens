@@ -1,5 +1,9 @@
 # Architecture
 
+## M3 runtime
+
+`docker compose` runs PostGIS and FastAPI. `app/core/db.py` supplies a bounded SQLAlchemy/pg8000 pool; Alembic versions the schema. `app/services/risk_service.py` caches the immutable feature snapshot, computes the selected index scenario and area-weights exact grid intersections. GeoJSON is transformed to EPSG:4326 and simplified by 15 m with topology preserved. Dataset updates require an API restart. Model metadata contains the index configuration and null ML metrics. Consistent errors and request timing surround the routers.
+
 Approved design: React/Leaflet → FastAPI → PostgreSQL/PostGIS. Offline Python processing prepares spatial features before deployment. Runtime requests apply a cheap rainfall-scenario adjustment and deterministic priority ranking.
 
 ## M0 implementation

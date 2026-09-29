@@ -38,6 +38,18 @@ The seed needs no Earth Engine credentials. Full raster validation and mask plot
 
 ## Checks
 
+M3's backend can run entirely in Docker after `.env` exists:
+
+```powershell
+docker compose build api
+docker compose run --rm api alembic -c backend/alembic.ini upgrade head
+docker compose run --rm api python -m data_pipeline.seed
+docker compose run --rm api python -m data_pipeline.score
+docker compose up -d api
+```
+
+The API listens on http://localhost:8000. Do not run another Uvicorn on the same port. The feature snapshot is fixed for a run; restart the API after loading new data. `scripts/smoke_api.py` checks all endpoints over HTTP.
+
 ```powershell
 .venv\Scripts\python -m pytest backend
 .venv\Scripts\python -m ruff check backend data_pipeline
