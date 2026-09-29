@@ -3,8 +3,10 @@ import type { FeatureCollection } from 'geojson'
 import { api, type Metadata, type Scenario, type Village, type VillageCollection } from './api/client'
 import StudyMap, { colors } from './components/Map'
 import VillageDetail from './components/VillageDetail'
+import PriorityPanel from './components/PriorityPanel'
 
 export default function App() {
+  const [priorityIds, setPriorityIds] = useState<string[]>([])
   const [scenario, setScenario] = useState<Scenario>('normal')
   const [data, setData] = useState<VillageCollection | null>(null)
   const [rivers, setRivers] = useState<FeatureCollection | null>(null)
@@ -44,7 +46,7 @@ export default function App() {
     <section className="toolbar" aria-label="Scenario controls"><div><label htmlFor="rainfall">Rainfall scenario</label><select id="rainfall" value={scenario} onChange={e => setScenario(e.target.value as Scenario)}><option value="normal">Normal rainfall</option><option value="heavy">Heavy rainfall</option><option value="extreme">Extreme rainfall</option></select></div><p className="rainfall-summary">{preset ? <><strong>{preset.rainfall_24h_mm.toFixed(1)} mm</strong> / 24h <span>·</span> <strong>{preset.rainfall_72h_mm.toFixed(1)} mm</strong> / 72h</> : 'Scenario context unavailable or loading…'}<small>Modeled reanalysis presets · not a weather forecast</small></p><label className="toggle"><input type="checkbox" checked={history} onChange={e => setHistory(e.target.checked)} /> Highlight SAR change zones</label></section>
     <div className="workspace"><section className="map-card" aria-label="Village susceptibility map">
       <div className="map-heading"><div><h3>Study-area susceptibility</h3><p>Click a village to inspect its contributing factors</p></div><span className="count">{data?.features.length ?? '—'} settlements</span></div>
-      <div className="map-frame">{data && data.features.length > 0 && <StudyMap data={data} rivers={rivers} selected={selected} onSelect={setSelected} history={history} />}
+      <div className="map-frame">{data && data.features.length > 0 && <StudyMap data={data} rivers={rivers} selected={selected} onSelect={setSelected} history={history} priorities={loading ? [] : priorityIds} />}
         {loading && <div className="map-state" role="status">Loading real study data…</div>}
         {error && <div className="map-state error" role="alert"><strong>Study data unavailable</strong><p>{error}</p><button onClick={() => setRetry(v => v+1)}>Retry data</button></div>}
         {!loading && !error && data?.features.length === 0 && <div className="map-state">No villages available for this scenario.</div>}
@@ -53,7 +55,7 @@ export default function App() {
       {history && <p className="map-note">Dashed borders: villages with &gt;1% mean SAR change in observed cells. Village summaries, not flood-extent boundaries. 2019 coverage is sparse; 2021 imagery predates peak response.</p>}
       {!rivers && <p className="map-note">Waterway layer unavailable or still loading.</p>}
     </section><aside>
-      <section className="priority-panel"><p className="eyebrow">RESPONSE PLANNING</p><h2>Where to assess first</h2><p>A transparent ranking combines susceptibility and estimated population exposure.</p><div className="empty-state">Priority allocation is being connected in M5.</div></section>
+      <PriorityPanel scenario={scenario} onSelect={setSelected} onRanked={setPriorityIds} />
       {selected ? detail ? <VillageDetail village={detail} close={() => setSelected(null)} /> : <section className="detail" role="status">{detailError || 'Loading village details…'}</section> : <section className="selection-hint"><span aria-hidden="true">⌖</span><h3>Explore a village</h3><p>Select a polygon on the map to see terrain, population estimates and historical evidence.</p></section>}
     </aside></div>
     <footer><span>Data processed {data?.last_processed ?? '—'} · SRTM · Sentinel-1 · WorldPop · Open-Meteo · DataMeet / OSM</span><strong>Academic decision support. Not an operational flood warning system.</strong></footer>

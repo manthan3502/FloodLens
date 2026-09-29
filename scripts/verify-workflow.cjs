@@ -1,0 +1,22 @@
+const { chromium } = require(process.env.PLAYWRIGHT_MODULE || 'playwright');
+const fs = require('node:fs'); const assert = require('node:assert/strict');
+(async()=>{
+ const browser=await chromium.launch({channel:'msedge',headless:true});
+ const page=await browser.newPage({viewport:{width:1440,height:1000}}); const errors=[];page.on('pageerror',e=>errors.push(e.message));
+ await page.goto(process.env.APP_URL || 'http://127.0.0.1:5173/'); await page.locator('.map-state').waitFor({state:'hidden'});
+ await page.getByLabel('Available response teams').fill('5'); await page.waitForFunction(()=>document.querySelectorAll('.priorities li').length===5);
+ const first=await page.locator('.priorities button').first().getAttribute('data-village-id');
+ const baseline=await page.locator('.priorities').innerText();
+ await page.getByLabel('Rainfall scenario').selectOption('extreme'); await page.locator('.map-state').waitFor({state:'hidden'}); await page.waitForFunction(()=>document.querySelectorAll('.priorities li').length===5);
+ const extreme=await page.locator('.priorities').innerText(); assert.notEqual(baseline,extreme);
+ assert.equal(await page.locator('.leaflet-overlay-pane path[stroke="#245ec1"]').count(),5);
+ await page.locator('.priorities button').first().click(); await page.getByLabel('Village detail',{exact:true}).waitFor();
+ await page.getByLabel('Available response teams').fill('3'); await page.waitForFunction(()=>document.querySelectorAll('.priorities li').length===3);
+ await page.screenshot({path:'docs/evidence/m5-priorities.png',fullPage:true});
+ await page.getByLabel('Available response teams').fill('0'); await page.getByText(/No teams allocated/).waitFor();
+ await page.getByLabel('Available response teams').fill('999'); await page.waitForFunction(()=>document.querySelectorAll('.priorities li').length===380);
+ const response=await page.request.post('http://localhost:8000/priorities/calculate',{data:{scenario_id:'extreme',available_teams:5}}); const a=await response.json();
+ const b=await (await page.request.post('http://localhost:8000/priorities/calculate',{data:{scenario_id:'extreme',available_teams:5}})).json(); assert.deepEqual(a,b);
+ assert.deepEqual(errors,[]); const result={gate_c:'GO',five_then_three:true,zero:true,oversized:380,scenario_updates:true,blue_outlines:5,detail:true,deterministic:true,first_baseline:first,errors};
+ fs.writeFileSync('docs/evidence/m5-gate-c.json',JSON.stringify(result,null,2));console.log(result);await browser.close();
+})().catch(e=>{console.error(e);process.exit(1)});

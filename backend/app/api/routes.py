@@ -1,6 +1,7 @@
 from typing import Annotated, Literal
 
 from app.core.db import query
+from app.services.priority_service import rank_villages
 from app.services.risk_service import evaluate, rivers
 from fastapi import APIRouter, HTTPException, Query
 from pydantic import BaseModel, ConfigDict, Field
@@ -40,8 +41,9 @@ def scenario(request: ScenarioRequest):
 
 @router.post("/priorities/calculate")
 def priorities(request: PriorityRequest):
-    # TODO(M5): add the specified two-term priority engine.
-    return {"items": [], "status": "pending_M5", "scenario_id": request.scenario_id}
+    weights = query("SELECT w_risk,w_pop FROM priority_weights_config WHERE id=1")[0]
+    villages = [f["properties"] for f in evaluate(request.scenario_id)["features"]]
+    return rank_villages(villages, request.available_teams, weights)
 
 
 @router.get("/rivers")

@@ -88,3 +88,13 @@ Built React/Leaflet components backed by the real API. Important files: `fronten
 3. **Why simplify geometry?** Fewer vertices reduce transfer/render costs while topology-preserving simplification retains valid village shapes.
 4. **Why show errors explicitly?** A blank or stale map could be mistaken for low risk; loading and unavailable states prevent that interpretation.
 5. **Is the dashed overlay actual flood extent?** No. It marks village summaries of incomplete SAR change evidence and is labeled accordingly.
+
+## M5 — Response priorities
+
+Built `backend/app/services/priority_service.py` and `frontend/src/components/PriorityPanel.tsx`. Python sorts explicit two-term scores; React aborts superseded requests and highlights returned IDs on the map. The formula is 0.65 × risk + 0.35 × normalized population; weights live in PostGIS.
+
+1. **Is priority ML?** No, it is a deterministic greedy ranking.
+2. **Why no road penalty?** Hard-to-reach villages should not silently lose priority. Road distance is displayed for human planning.
+3. **Why not add historical severity?** It already contributes to susceptibility; adding it again would double-count it.
+4. **What happens on ties or too many teams?** Stable village IDs break ties; oversized requests return all villages.
+5. **How are missing population values treated?** They stay visibly unknown; ranking uses the study median (or neutral 0.5 when everything is unknown), never an assumed zero.

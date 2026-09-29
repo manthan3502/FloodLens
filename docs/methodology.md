@@ -35,3 +35,7 @@ Categories: Low [0,.25), Medium [.25,.50), High [.50,.75), Critical [.75,1]. The
 ## M2 verification
 
 14 risk tests passed. Repeated scoring matched for all 38,083 cells and three scenarios. `docs/evidence/m2-scoring.json` records categories, bounds and deterministic hashes. 114,249 grid/scenario rows persisted. Normal spans 0.01899–0.74013; Extreme 0.20244–0.92359. These are output checks, not accuracy metrics.
+
+## Implemented priority normalization (M5)
+
+Risk is the existing [0,1] index. Population is `log1p(p)/log1p(max_known_study_population)`; the log transform limits domination by large settlements but preserves order. The study-wide denominator stays fixed across scenarios and team counts. Unknown p uses the known study median solely inside ranking, with the reported estimate still null and the rule returned explicitly. If all are unknown, use 0.5; if all known values are zero, use zero. Default weights 0.65/0.35 are read from `priority_weights_config`, never fit claims. Ties use ascending village ID. Top N is capped at the number of villages. Accessibility and historical evidence cannot add independent terms.

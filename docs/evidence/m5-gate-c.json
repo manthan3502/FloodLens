@@ -1,0 +1,12 @@
+{
+  "gate_c": "GO",
+  "five_then_three": true,
+  "zero": true,
+  "oversized": 380,
+  "scenario_updates": true,
+  "blue_outlines": 5,
+  "detail": true,
+  "deterministic": true,
+  "first_baseline": "v-275300428743412000",
+  "errors": []
+}
