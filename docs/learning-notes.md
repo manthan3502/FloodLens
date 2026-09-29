@@ -78,3 +78,13 @@ Built a deterministic five-factor index because the SAR dates and coverage canno
 3. **What is spatial leakage?** Nearby cells share terrain and observations; a random split can make performance look better than geographic holdouts.
 4. **What do PR-AUC and temporal holdout mean?** PR-AUC summarizes precision/recall for rare positives. Temporal holdout tests a different event. Neither is claimed here because usable independent labels are missing.
 5. **How are unknowns handled?** Required terrain features fail loudly if missing; unknown historical evidence is explicitly assigned neutral 0.5 and flagged. Population stays null and is excluded from susceptibility.
+
+## M4 — Interactive map
+
+Built React/Leaflet components backed by the real API. Important files: `frontend/src/App.tsx`, `api/client.ts`, `components/Map.tsx`, `components/VillageDetail.tsx`. React owns scenario/selection state; Leaflet draws GeoJSON; AbortController prevents old requests from overwriting new selections. Vitest tests interactions and Playwright checks the real browser.
+
+1. **What is a choropleth?** Polygons colored by a measured or computed property, here relative susceptibility.
+2. **How does rainfall recolor the map?** The preset triggers an API request; React passes the new GeoJSON to Leaflet.
+3. **Why simplify geometry?** Fewer vertices reduce transfer/render costs while topology-preserving simplification retains valid village shapes.
+4. **Why show errors explicitly?** A blank or stale map could be mistaken for low risk; loading and unavailable states prevent that interpretation.
+5. **Is the dashed overlay actual flood extent?** No. It marks village summaries of incomplete SAR change evidence and is labeled accordingly.

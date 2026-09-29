@@ -1,0 +1,9 @@
+{
+  "villages": 380,
+  "scenario_recolors": true,
+  "detail": true,
+  "mobile_no_overflow": true,
+  "error_and_retry": true,
+  "loading": true,
+  "errors": []
+}
