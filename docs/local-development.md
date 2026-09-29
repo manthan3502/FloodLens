@@ -21,7 +21,20 @@ npm ci
 npm run dev
 ```
 
-Open http://localhost:5173. The M0 map explicitly reports that data verification is pending. No seed dataset exists yet.
+Open http://localhost:5173. The M0 map remains a preview until M4. A real processed seed is available under `data/processed/`.
+
+## M1 seed and Linux verification
+
+The Linux verification image avoids host-specific compiled-library restrictions. From the repository root:
+
+```powershell
+docker build -f data_pipeline/Dockerfile.visualqa -t floodlens-visualqa data_pipeline
+$env:DATABASE_URL = ((Get-Content .env | Where-Object { $_ -like 'DATABASE_URL=*' }) -split '=',2)[1] -replace 'localhost','db'
+docker run --rm --network floodlens_default --env DATABASE_URL --volume "${PWD}:/work" floodlens-visualqa python -m data_pipeline.seed
+docker run --rm --network floodlens_default --env DATABASE_URL --volume "${PWD}:/work" floodlens-visualqa python -m pytest data_pipeline/tests -q
+```
+
+The seed needs no Earth Engine credentials. Full raster validation and mask plotting additionally require the ignored offline intermediates; tests use small fixtures plus the restored PostGIS data. Reproducing raw ingestion requires Earth Engine authorization and the documented source pipeline.
 
 ## Checks
 

@@ -1,6 +1,6 @@
 fastapi>=0.115,<1
 uvicorn>=0.34,<1
-psycopg[binary]>=3.2,<4
+pg8000>=1.31,<2
 sqlalchemy>=2.0,<3
 geoalchemy2>=0.17,<1
 alembic>=1.15,<2

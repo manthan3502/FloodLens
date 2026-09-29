@@ -1,0 +1,59 @@
+{
+  "status": "passed",
+  "grid_cells": 38083,
+  "villages": 380,
+  "population_conservation_error": 0.0,
+  "documented_exceptions": {
+    "village_population_nulls": [
+      {
+        "id": "v-275300428404193900",
+        "name": "Bongewadi",
+        "tehsil": "Panhala"
+      },
+      {
+        "id": "v-275300428404194400",
+        "name": "Mhalunge Tarf Thane",
+        "tehsil": "Panhala"
+      },
+      {
+        "id": "v-275300428404195000",
+        "name": "Gude",
+        "tehsil": "Panhala"
+      },
+      {
+        "id": "v-275300428404200800",
+        "name": "Padasali",
+        "tehsil": "Panhala"
+      },
+      {
+        "id": "v-275300428404201100",
+        "name": "Pombre",
+        "tehsil": "Panhala"
+      },
+      {
+        "id": "v-275300428404202400",
+        "name": "Atkirwadi",
+        "tehsil": "Panhala"
+      },
+      {
+        "id": "v-275300428404203900",
+        "name": "Gogave",
+        "tehsil": "Panhala"
+      },
+      {
+        "id": "v-275300428704226300",
+        "name": "Waghobawadi",
+        "tehsil": "Karvir"
+      },
+      {
+        "id": "v-275300428704227600",
+        "name": "Donwadi",
+        "tehsil": "Karvir"
+      }
+    ],
+    "grid_population_nulls": 15853,
+    "reason": "Constrained raster has no valid population pixel in these cells; unknown remains null, village sums use observed population pixels",
+    "unobserved_2019_cells": 35604,
+    "unobserved_2021_cells": 118
+  }
+}

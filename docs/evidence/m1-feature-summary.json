@@ -1,0 +1,25 @@
+{
+  "cells": 38083,
+  "villages": 380,
+  "population_sum_villages": 2470371.079591334,
+  "population_sum_grid": 2470371.079591334,
+  "population_conservation_difference": 0.0,
+  "population_grid_nulls": 15853,
+  "population_method": "Native population pixels assigned once by center to stable-ID village raster and UTM grid. No valid source pixel remains null. Overlapping villages use stable last-ID wins to avoid double counting.",
+  "events": {
+    "2019": {
+      "change_threshold_db": -1.5,
+      "covered_pixels": 152635,
+      "flood_pixels": 8058,
+      "coverage_fraction": 0.05933335639780618,
+      "method": "Matched descending orbit, linear-power speckle mean, Otsu change threshold capped at -1.5 dB, during VV<-15 dB, slope<5 degrees, pre VV>=-15 dB water screen. Unvalidated proxy."
+    },
+    "2021": {
+      "change_threshold_db": -1.5,
+      "covered_pixels": 2572499,
+      "flood_pixels": 14383,
+      "coverage_fraction": 1.0,
+      "method": "Matched descending orbit, linear-power speckle mean, Otsu change threshold capped at -1.5 dB, during VV<-15 dB, slope<5 degrees, pre VV>=-15 dB water screen. Unvalidated proxy."
+    }
+  }
+}

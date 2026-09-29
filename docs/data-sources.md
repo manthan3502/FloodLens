@@ -1,5 +1,13 @@
 # Data-source audit — Gate A GO WITH REDUCED SCOPE
 
+## M1 processed sources (supersedes outstanding M0 tasks below)
+
+All 51 raster downloads passed SHA-256 verification. Full manifests are `m1-raster-downloads.json` and the two `m1-sentinel-*-sources.json` files. SRTM elevation/slope and Sentinel-1 VV are processed on aligned 30 m UTM grids. WorldPop retains native population pixels so reprojection cannot multiply people. Observed population sums conserve exactly at 2,470,371.0796; nine villages remain unknown. Source vintages differ and these are estimates.
+
+DataMeet named pieces dissolve to 380 settlements; nine unnamed pieces are quarantined. Actual OSM extraction used its map API after Overpass failures, with cached bounded tiles and subdivision; 95 waterways and 1,897 major-road ways. Rainfall presets use pooled June–September 2015–2024 daily and rolling-three-day reanalysis quantiles (50/95/99), checked alongside retained 2019/2021 event samples. Normal is 3.70/13.50 mm; Heavy 29.70/78.51; Extreme 53.34/140.52. These are comparative scenario inputs, not forecasts or return periods.
+
+SAR 2019 covers 5.933% of the rasterized study area; 2021 covers it but uses a single 22 July acquisition. [PIB's 25 July 2021 report](https://www.pib.gov.in/Pressreleaseshare.aspx?PRID=1738743&lang=2&reg=48) supports the affected-tehsil plausibility check only. The masks are not peak inundation or independently validated labels. See M1's inspection image and recorded exceptions.
+
 ## Final M0 selection (2026-09-29 IST)
 
 Authenticated GEE access and actual GeoTIFF clips passed. Use SRTM `USGS/SRTMGL1_003`; use the `population` band from [WorldPop constrained 2020](https://developers.google.com/earth-engine/datasets/catalog/WorldPop_GP_100m_pop_age_sex_cons_unadj), filtered to India. The catalog describes it as UN-adjusted; keep that qualification in population outputs. Actual clips and nodata handling are recorded in `gee-raster-clips.json`. This avoids the stalled country download without substituting the unconstrained GP product.
