@@ -22,3 +22,5 @@ Authenticate Vercel/Render/Supabase, provision only free resources, deploy and i
 Do not mark FloodLens complete until deployment and production verification pass.
 
 Final local verification after deployment preparation: all 52 Python tests passed against the bootstrap-created database with row-level security enabled; six frontend tests, lint and build passed. Recorded local demo: `docs/evidence/floodlens-local-demo.webm` (about 1.5 MB). `scripts/verify-production.cjs` requires actual HTTPS application/API URLs and remains unrun until cloud access exists.
+
+Final startup race fixed: Compose now checks API liveness, and documented startup waits for health before verification. A retry after server initialization had already confirmed all endpoints; the health check makes that ordering explicit.

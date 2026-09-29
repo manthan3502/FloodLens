@@ -56,7 +56,7 @@ docker compose build api
 docker compose run --rm api alembic -c backend/alembic.ini upgrade head
 docker compose run --rm api python -m data_pipeline.seed
 docker compose run --rm api python -m data_pipeline.score
-docker compose up -d api
+docker compose up -d --wait api
 cd frontend
 npm ci
 npm run dev
