@@ -1,0 +1,24 @@
+{
+  "method": "Pooled four-tehsil sample points; June\u2013September 2015\u20132024 daily and rolling 3-day precipitation; separate 50th/95th/99th percentiles. Modeled reanalysis scenarios, not forecasts or independent station measurements.",
+  "daily_sample_count": 4880,
+  "scenarios": [
+    {
+      "id": "normal",
+      "name": "Normal",
+      "rainfall_24h_mm": 3.7,
+      "rainfall_72h_mm": 13.5
+    },
+    {
+      "id": "heavy",
+      "name": "Heavy",
+      "rainfall_24h_mm": 29.7,
+      "rainfall_72h_mm": 78.51
+    },
+    {
+      "id": "extreme",
+      "name": "Extreme",
+      "rainfall_24h_mm": 53.34,
+      "rainfall_72h_mm": 140.52
+    }
+  ]
+}

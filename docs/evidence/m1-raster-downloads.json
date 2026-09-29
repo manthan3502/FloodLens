@@ -1,0 +1,257 @@
+[
+  {
+    "file": "terrain-000.tif",
+    "bytes": 2596383,
+    "sha256": "e20392d5e2fbe62d0e279aff1e9fc13cf0751ec76292c11ba8e7e76e84e3355e"
+  },
+  {
+    "file": "terrain-001.tif",
+    "bytes": 2562066,
+    "sha256": "26ea979a536ad9d525159fddb5c162331f6300a8f6970f7e9e3d2b367828eba1"
+  },
+  {
+    "file": "terrain-002.tif",
+    "bytes": 2514526,
+    "sha256": "3237cd88637bb0ad7f56192a89259ed485726ef63fae29514d4882f704732936"
+  },
+  {
+    "file": "terrain-003.tif",
+    "bytes": 2110500,
+    "sha256": "7ec9a10051ccd061aa2744c5b3f78d8d80cba5bf8c38f12864135f0f4c96297c"
+  },
+  {
+    "file": "terrain-004.tif",
+    "bytes": 2071289,
+    "sha256": "25fcb069976b3a5086b2d99f683a155fb04871bae0786f0938d581eba1efb4ca"
+  },
+  {
+    "file": "terrain-005.tif",
+    "bytes": 2035747,
+    "sha256": "8507cbfef619600a4d6fa35f26e3e57c673a83ad92f0de5a067fb25374e9ecb5"
+  },
+  {
+    "file": "terrain-006.tif",
+    "bytes": 1610662,
+    "sha256": "83fc8941752a2c88a5d080af7757cc30195481075551e7e652fe5237557ccae4"
+  },
+  {
+    "file": "terrain-007.tif",
+    "bytes": 1629756,
+    "sha256": "77d47e78528d313ba6e324bcfac3c2862eae05bb42b253e19b71b9f06e8835c1"
+  },
+  {
+    "file": "terrain-008.tif",
+    "bytes": 1487940,
+    "sha256": "355dbbef9723d8ddbb75d98cee7d36803b939824ad8933f6510c0a7576ed6dd6"
+  },
+  {
+    "file": "terrain-009.tif",
+    "bytes": 1389859,
+    "sha256": "b0387384464898005d096b8edad10b5c0893ed733abd2b9a95f949f334918938"
+  },
+  {
+    "file": "terrain-010.tif",
+    "bytes": 1424945,
+    "sha256": "117430331b5b9beb88472519fea030d5a517b186e4d25abc28926bb1ac0689ef"
+  },
+  {
+    "file": "terrain-011.tif",
+    "bytes": 1332706,
+    "sha256": "ec8a7dfa1bffb853e5500f0fccd2949426c24006c06042647e441a82dfe76e04"
+  },
+  {
+    "file": "terrain-012.tif",
+    "bytes": 1411852,
+    "sha256": "d8a3ab0d6493b0fe9d33415716b8411db3625ec349137987dc738022c3fbb737"
+  },
+  {
+    "file": "terrain-013.tif",
+    "bytes": 1473141,
+    "sha256": "757fa7a78ddc59b1699e6848ef4dcf77fd46333eb6bc3bb8ffb6c014f79cd53d"
+  },
+  {
+    "file": "terrain-014.tif",
+    "bytes": 1632352,
+    "sha256": "1a256971c8a1e2bf68473bf0f8b2b827500c5350df4ed347cf15c75e725326a0"
+  },
+  {
+    "file": "population-000.tif",
+    "bytes": 305856,
+    "sha256": "503144cddc027f0eb85802a164e42d5221978a1778e0281d0239a3aa7cf38a8e"
+  },
+  {
+    "file": "population-001.tif",
+    "bytes": 483896,
+    "sha256": "254e8b33bdf118705b0850fdc5ad6dfad95863a06fc3b1384ca82607e034ff96"
+  },
+  {
+    "file": "population-002.tif",
+    "bytes": 745375,
+    "sha256": "b8e556930d8fcdf352cbd3e4cf79447dda2159851e7f5bdd33c6896a7a102bfd"
+  },
+  {
+    "file": "population-003.tif",
+    "bytes": 1088730,
+    "sha256": "9448e7771d4d010f6ebd523511a87f239219ecfb532ce5da1b6db657e279b233"
+  },
+  {
+    "file": "population-004.tif",
+    "bytes": 283232,
+    "sha256": "98412174b4947d70795575305fb2d6a56879e12d453c2fadd680bc1e315579f5"
+  },
+  {
+    "file": "population-005.tif",
+    "bytes": 624958,
+    "sha256": "39bcb40bd5c8224c6e7b4bd6c2606790ce16d6d527e4d8a5ac1c4d08b7513805"
+  },
+  {
+    "file": "sar2019-000.tif",
+    "bytes": 5298,
+    "sha256": "0809bd9df7051d82c80e01aefcfac2e4bccd11129727acaac8cf98a3dbbb0dbe"
+  },
+  {
+    "file": "sar2019-001.tif",
+    "bytes": 5298,
+    "sha256": "1b90883626e0ca5c1ded7f5227410e00704de4d68ed25a7fe3dc0d75f9a5f3e1"
+  },
+  {
+    "file": "sar2019-002.tif",
+    "bytes": 2988644,
+    "sha256": "1d7209f483ff62312500102a05f4a7ad6efc1f72b7e46177be3a8340a1f0120c"
+  },
+  {
+    "file": "sar2019-003.tif",
+    "bytes": 5298,
+    "sha256": "0c14ec71830469c140eb2af0bef1e12019e22a2dd9d8729c3628096116ee0eba"
+  },
+  {
+    "file": "sar2019-004.tif",
+    "bytes": 7406,
+    "sha256": "d29d54a8cfa2ab4676f3839950c0c4cad49101f393e7930a442af491e6b34ff8"
+  },
+  {
+    "file": "sar2019-005.tif",
+    "bytes": 3768969,
+    "sha256": "551d59e1969930c58e024da802646fbf45be3c7004c515c222bfea7497005e7a"
+  },
+  {
+    "file": "sar2019-006.tif",
+    "bytes": 5298,
+    "sha256": "d02219ef72e64d304500c144ef93c1e02082829959552ccf30b6162854478d8e"
+  },
+  {
+    "file": "sar2019-007.tif",
+    "bytes": 467928,
+    "sha256": "9a8790f407c800de3d0456f14ffc46bdc35057539632e71dc6d5447235c2b991"
+  },
+  {
+    "file": "sar2019-008.tif",
+    "bytes": 4135805,
+    "sha256": "3dfb56d03325261ceab42b4a73dbc7a103d42aa48d51e9d4333d21d1e15e8de1"
+  },
+  {
+    "file": "sar2019-009.tif",
+    "bytes": 5298,
+    "sha256": "5765014c5428eac9dec759a6b43f7dc31a7974a92a824129ebc9aa01be199319"
+  },
+  {
+    "file": "sar2019-010.tif",
+    "bytes": 792864,
+    "sha256": "f77e62110640c41eee16aa2c8c1e14d01e9283c00eac7587e8580455491a2af7"
+  },
+  {
+    "file": "sar2019-011.tif",
+    "bytes": 4147685,
+    "sha256": "f0e488b40666d1a5f7c0ec0ba74fb7a3c60361f86fc85f01a64412e98f99f96a"
+  },
+  {
+    "file": "sar2019-012.tif",
+    "bytes": 5298,
+    "sha256": "15cc6a57198645bf9682b72bd49161a6e8d6225fe251b705072e14d22d4a7f40"
+  },
+  {
+    "file": "sar2019-013.tif",
+    "bytes": 912864,
+    "sha256": "f499e44fdebc598d8d2ab7239159c02a6062b75ab7f9b8bed2befe07f29168ad"
+  },
+  {
+    "file": "sar2019-014.tif",
+    "bytes": 4109745,
+    "sha256": "0c70da40c7850c3da88894f57dac007e2ffd37ec10e9fb39f0362bd7e31d6ce0"
+  },
+  {
+    "file": "sar2021-000.tif",
+    "bytes": 4167774,
+    "sha256": "e4c3408f0ae33e67c7d0c97ddb046fa774c8f2797c6c22559e118ef01864b1cc"
+  },
+  {
+    "file": "sar2021-001.tif",
+    "bytes": 4167350,
+    "sha256": "a02bc844c3cc20d4b9a46c508d6ec4a4305ae1cd74058a1c70b8cdd8895cd330"
+  },
+  {
+    "file": "sar2021-002.tif",
+    "bytes": 4168558,
+    "sha256": "a1db01fa802323aa12191b48806459ce145f1fb0deb8cf41975065e4900ab6b5"
+  },
+  {
+    "file": "sar2021-003.tif",
+    "bytes": 4141136,
+    "sha256": "9979b58eb6ca2c67d82d5093ea8730ff7442917e052b0a5e7a2d6b64cf82d688"
+  },
+  {
+    "file": "sar2021-004.tif",
+    "bytes": 4149031,
+    "sha256": "bbd78a519519f4998caa9c54ff3d26959dfb5f57dbc34fd3efa0d05a2456c20f"
+  },
+  {
+    "file": "sar2021-005.tif",
+    "bytes": 4136974,
+    "sha256": "2ca592bc15ff431ee9222dfe2a6a0ed53f0f2be824b24e813648f30c7b7ba697"
+  },
+  {
+    "file": "sar2021-006.tif",
+    "bytes": 4154251,
+    "sha256": "999841b5f95fce0cfafb9c7565428c937f5a228c54af1e41dcaa10d310a6f4ad"
+  },
+  {
+    "file": "sar2021-007.tif",
+    "bytes": 4172095,
+    "sha256": "4c673ecbda6fd2934ad2fbad558cb0a25327bf52e3b4bca9df3947552a48ec6d"
+  },
+  {
+    "file": "sar2021-008.tif",
+    "bytes": 4164461,
+    "sha256": "d7e2e0298b6549e68ce935f66afbf434257a34bd7cf999f65c7ddc1c7b43488a"
+  },
+  {
+    "file": "sar2021-009.tif",
+    "bytes": 4155728,
+    "sha256": "d2c7066c5dd48b1471079a9e0b53dfbd29a8d4b0fe59743c95587974c2fd7011"
+  },
+  {
+    "file": "sar2021-010.tif",
+    "bytes": 4185733,
+    "sha256": "37fcf66f80f7530076c253689c754d7ffa05885026dab4b94bdc99ba8e027ac6"
+  },
+  {
+    "file": "sar2021-011.tif",
+    "bytes": 4168819,
+    "sha256": "2cff20a2bce1b0821d7541867deaddcd316e53ca658c662bfb2cabe5d7f315d2"
+  },
+  {
+    "file": "sar2021-012.tif",
+    "bytes": 4166136,
+    "sha256": "7c576b40c2038abce89c8869bee63d7e34dc31b2bff2e16835fcf36d358733f6"
+  },
+  {
+    "file": "sar2021-013.tif",
+    "bytes": 4160067,
+    "sha256": "3cc81019fd30ffe1c3b9d5d707f84eb27d9a3124d4564c89ccfe8054713ae874"
+  },
+  {
+    "file": "sar2021-014.tif",
+    "bytes": 4136615,
+    "sha256": "9e7c7c5185be533ee59aed4406eea2583bcc92aa4cc68c508d5a979e934a7d9d"
+  }
+]

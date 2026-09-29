@@ -1,0 +1,10 @@
+{
+  "tiles": 57,
+  "way_counts": {
+    "river": 95,
+    "road": 1897
+  },
+  "source": "OpenStreetMap map API",
+  "license": "ODbL",
+  "transport_fallback": "Overpass requests failed during M0; same OSM source fetched in bounded cached map extracts."
+}

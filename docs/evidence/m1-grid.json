@@ -1,0 +1,14 @@
+{
+  "villages": 380,
+  "grid_cells": 38083,
+  "intersection_parts": 47843,
+  "crs": "EPSG:32643",
+  "spacing_m": 250,
+  "bounds_utm": [
+    373296.49098365894,
+    1823471.2184251305,
+    468084.36239601905,
+    1870662.4889715086
+  ],
+  "unnamed_policy": "Nine unnamed source polygons are quarantined, not silently labeled or included in village population. Their area and coverage are reported as a limitation."
+}
