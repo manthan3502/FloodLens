@@ -24,6 +24,11 @@ def test_production_database_requires_verified_tls(monkeypatch):
     context = captured["connect_args"]["ssl_context"]
     assert context.verify_mode == ssl.CERT_REQUIRED
     assert context.check_hostname
+    assert any(
+        dict(name[0] for name in certificate["subject"]).get("commonName")
+        == "Supabase Root 2021 CA"
+        for certificate in context.get_ca_certs()
+    )
 
 
 def test_production_rejects_unconfigured_or_http_cors():

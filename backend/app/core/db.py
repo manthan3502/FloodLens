@@ -8,6 +8,16 @@ from pathlib import Path
 from sqlalchemy import create_engine, text
 from sqlalchemy.engine import make_url
 
+SUPABASE_CA_CERT = (
+    Path(__file__).resolve().parents[2] / "certs" / "supabase-prod-ca-2021.crt"
+)
+
+
+def verified_ssl_context():
+    context = ssl.create_default_context()
+    context.load_verify_locations(cafile=SUPABASE_CA_CERT)
+    return context
+
 
 def database_url():
     url = os.getenv("DATABASE_URL")
@@ -54,7 +64,7 @@ def engine():
         pool_pre_ping=True,
         pool_size=3,
         max_overflow=2,
-        connect_args={"ssl_context": ssl.create_default_context()} if secure else {},
+        connect_args={"ssl_context": verified_ssl_context()} if secure else {},
     )
 
 
