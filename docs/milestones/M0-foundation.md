@@ -48,7 +48,7 @@ WorldPop remote byte-range retry returned HTTP 200 and the whole 531,062,384-byt
 
 ## Git record
 
-Foundation commit `d32dd6f` pushed to the private repository https://github.com/manthan3502/FloodLens. A separate M0 feasibility commit records source evidence and follow-up scripts. Use `git log --oneline` for its exact hash. No commit claims that Gate A passed. Raw data, credentials and local tools are ignored.
+Foundation commit `d32dd6f` pushed to the public repository https://github.com/manthan3502/FloodLens. A separate M0 feasibility commit records source evidence and follow-up scripts. Use `git log --oneline` for its exact hash. No commit claims that Gate A passed. Raw data, credentials and local tools are ignored.
 
 ## Next action
 

@@ -19,7 +19,7 @@ npm ci
 npm run dev
 ```
 
-Open http://localhost:5173. The API is http://localhost:8000 and OpenAPI is `/docs`. The processed real-data seed needs no Earth Engine access. Do not copy raw data or credentials into the clone. This project is private until its owner changes visibility; GitHub access is needed to clone it.
+Open http://localhost:5173. The API is http://localhost:8000 and OpenAPI is `/docs`. The processed real-data seed needs no Earth Engine access. Do not copy raw data or credentials into the clone. The repository is public and can be cloned without GitHub authentication.
 
 Keep `.env` local. The included password is for localhost development only. After changing API origin, set `VITE_API_BASE_URL` in `frontend/.env.local` and rebuild/restart Vite; set the exact frontend origin in `CORS_ALLOWED_ORIGINS`. Production requires HTTPS origins and a TLS database connection. Restart the API after a data refresh because feature snapshots are cached.
 

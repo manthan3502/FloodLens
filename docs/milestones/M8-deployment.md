@@ -7,7 +7,7 @@ Status: **complete — Gate D GO, 30 September 2026**. See [the full Definition 
 - Dashboard: https://floodlens-lilac.vercel.app
 - API: https://floodlens-nz9r.onrender.com
 - Database: Supabase PostGIS, accessed through verified TLS.
-- Repository remains private; no visibility or paid-plan change was made.
+- Repository is public; no paid-plan change was made.
 
 ## Final verification
 
