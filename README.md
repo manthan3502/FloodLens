@@ -9,6 +9,7 @@ FloodLens helps explore flood-prone settlements in Karvir, Panhala, Hatkanangale
 **Status: FLOODLENS COMPLETE — Gate D passed on 30 September 2026.** M0–M8 are complete under the documented Gate A/B reduced scope. The GitHub repository remains private.
 
 [Open the live dashboard](https://floodlens-lilac.vercel.app) · [API documentation](https://floodlens-nz9r.onrender.com/docs) · [Production walkthrough video](docs/evidence/floodlens-production-demo.webm)
+Live demo verified on Vercel and Render production deployment.
 
 ## Why this project
 
