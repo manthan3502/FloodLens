@@ -29,6 +29,8 @@ The manual Docker service could use the Dockerfile's direct Uvicorn CMD, bypassi
 
 The next Render bootstrap reached the Supabase Session Pooler but pg8000 rejected its private certificate chain. Database URL and verified TLS configuration are now shared by Alembic, the API, seed import and scoring paths. Each adds Supabase's public Root 2021 CA to a Python `SSLContext` while retaining `CERT_REQUIRED` and hostname verification. No Render variable was added; the existing `DATABASE_URL` remains valid.
 
+The first production seed exceeded Render's port-scan window after loading the largest tables. Startup now binds the assigned port immediately with an explicit 503 initialization response. It checks every seeded table against the artifact manifest, resumes partial imports idempotently, skips the full import after completion, and hands the same port to Uvicorn after bootstrap.
+
 Final local verification after deployment preparation: all 52 Python tests passed against the bootstrap-created database with row-level security enabled; six frontend tests, lint and build passed. Recorded local demo: `docs/evidence/floodlens-local-demo.webm` (about 1.5 MB). `scripts/verify-production.cjs` requires actual HTTPS application/API URLs and remains unrun until cloud access exists.
 
 Final startup race fixed: Compose now checks API liveness, and documented startup waits for health before verification. A retry after server initialization had already confirmed all endpoints; the health check makes that ordering explicit.

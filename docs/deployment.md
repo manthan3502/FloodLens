@@ -4,7 +4,7 @@ Status: prepared; cloud authentication and actual production smoke verification 
 
 ## Topology
 
-Vercel Hobby hosts `frontend/`; Render's explicitly **free** Docker service runs FastAPI; Supabase Free stores PostGIS data. `render.yaml` never defaults to a paid plan. The Docker image contains the 3.9 MB source-derived seed, not raw rasters. On startup, `scripts/deploy/start.py` applies migrations, seeds an empty database, scores missing metadata, then starts Uvicorn on Render's PORT.
+Vercel Hobby hosts `frontend/`; Render's explicitly **free** Docker service runs FastAPI; Supabase Free stores PostGIS data. `render.yaml` never defaults to a paid plan. The Docker image contains the 3.9 MB source-derived seed, not raw rasters. On startup, `scripts/deploy/start.py` immediately binds Render's port with a 503 initialization response, applies migrations, resumes an incomplete seed only when required, scores missing metadata, then replaces the initialization listener with Uvicorn on the same port.
 
 ## Account setup required from the owner
 

@@ -1,0 +1,10 @@
+{
+  "districts": 1,
+  "villages": 380,
+  "grid_cells": 38083,
+  "grid_village_parts": 47843,
+  "historical_flood_events": 2,
+  "grid_flood_evidence": 76166,
+  "rainfall_scenarios": 3,
+  "waterways": 95
+}
