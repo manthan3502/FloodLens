@@ -17,14 +17,43 @@ SEED_COUNTS = json.loads(
 
 
 class InitializationHandler(BaseHTTPRequestHandler):
+    def cors_headers(self):
+        origin = self.headers.get("Origin")
+        allowed = os.getenv("CORS_ALLOWED_ORIGINS", "http://localhost:5173")
+        if origin and origin in {value.strip() for value in allowed.split(",")}:
+            self.send_header("Access-Control-Allow-Origin", origin)
+            self.send_header("Vary", "Origin")
+
     def do_GET(self):
         body = b'{"status":"initializing"}'
         self.send_response(503)
         self.send_header("Content-Type", "application/json")
         self.send_header("Content-Length", str(len(body)))
         self.send_header("Retry-After", "10")
+        self.cors_headers()
         self.end_headers()
         self.wfile.write(body)
+
+    do_POST = do_GET
+
+    def do_OPTIONS(self):
+        allowed = os.getenv("CORS_ALLOWED_ORIGINS", "http://localhost:5173")
+        valid = (
+            self.headers.get("Origin") in {v.strip() for v in allowed.split(",")}
+            and self.headers.get("Access-Control-Request-Method") in {"GET", "POST"}
+            and all(
+                value.strip().lower() in {"", "content-type"}
+                for value in self.headers.get(
+                    "Access-Control-Request-Headers", ""
+                ).split(",")
+            )
+        )
+        self.send_response(200 if valid else 400)
+        self.cors_headers()
+        self.send_header("Access-Control-Allow-Methods", "GET, POST")
+        self.send_header("Access-Control-Allow-Headers", "Content-Type")
+        self.send_header("Content-Length", "0")
+        self.end_headers()
 
     def log_message(self, format, *args):
         return
