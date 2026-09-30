@@ -10,4 +10,4 @@
 - One team per ranked village is a deterministic greedy demonstration. Actual capacity, logistics and multiple resource types are outside scope. Accessibility never penalizes the score.
 - Offline feature snapshots are cached per API worker; restart after data refresh. Map simplification trades small boundary detail for responsiveness. Source-derived artifacts retain upstream licenses.
 - Basemap tiles require internet access. The app explicitly reports failed data requests; a tile-provider outage can leave polygons without a basemap.
-- Planned free deployment has cold starts and quotas. Public deployment and Gate D remain pending until cloud authentication and actual production verification succeed.
+- The live free deployment has cold starts and quotas. The final fresh-browser check loaded 380 villages in 16.8 seconds; a sleeping Render instance can take longer. It did not deliberately suspend the backend. The production demo recording is a backup when hosting or tile services are unavailable.

@@ -20,3 +20,5 @@ data/interim/
 *.pem
 *service-account*.json
 .DS_Store
+
+.vercel

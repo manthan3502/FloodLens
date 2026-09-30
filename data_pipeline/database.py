@@ -6,9 +6,7 @@ from pathlib import Path
 from urllib.parse import parse_qs, urlparse
 
 PROJECT_ROOT = Path(__file__).resolve().parents[1]
-SUPABASE_CA_CERT = (
-    PROJECT_ROOT / "backend" / "certs" / "supabase-prod-ca-2021.crt"
-)
+SUPABASE_CA_CERT = PROJECT_ROOT / "backend" / "certs" / "supabase-prod-ca-2021.crt"
 SSL_MODES = {"require", "verify-full", "verify-ca"}
 
 

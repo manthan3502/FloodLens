@@ -1,0 +1,29 @@
+{
+  "date": "2026-09-30",
+  "python_local": {
+    "passed": 57,
+    "skipped": 0
+  },
+  "python_supabase_production_config": {
+    "passed": 57,
+    "skipped": 0,
+    "database_access": "read-only"
+  },
+  "frontend_tests": 6,
+  "ruff": "passed",
+  "black": "passed",
+  "frontend_lint": "passed",
+  "frontend_build": "passed",
+  "production_api_smoke": {
+    "health": 200,
+    "villages": 200,
+    "rivers": 200,
+    "model_metadata": 200,
+    "village_detail": 200,
+    "scenario_evaluate": 200,
+    "priorities_calculate": 200
+  },
+  "production_browser": "production-smoke.json",
+  "secrets_scan": "no findings",
+  "gate_d": "GO"
+}

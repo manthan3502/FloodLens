@@ -1,0 +1,6 @@
+data/
+.env
+.env.deploy
+.tools/
+.pytest_cache/
+.ruff_cache/

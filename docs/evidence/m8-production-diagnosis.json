@@ -11,6 +11,7 @@
   },
   "diagnosis": "The application is running but database-backed requests fail. A manually created Docker service can skip scripts/deploy/start.py by using the Dockerfile's former direct Uvicorn CMD.",
   "fix": "Use python scripts/deploy/start.py as the Docker image default and Render Docker command. The backend also loads Supabase Root 2021 CA into pg8000's SSLContext with certificate and hostname verification enabled.",
-  "latest_bootstrap_result": "Render reached the Supabase Session Pooler; the remaining certificate-chain failure is addressed by the bundled Supabase CA. Production redeploy verification remains pending.",
-  "gate_d": "pending"
+  "latest_bootstrap_result": "Resolved: all seven live API smoke endpoints returned 200; all 57 tests passed against production Supabase with verified TLS. Production browser workflow passed.",
+  "gate_d": "GO",
+  "resolution_checked_at": "2026-09-30"
 }

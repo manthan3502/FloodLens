@@ -120,12 +120,14 @@ Pinned dependencies, versioned migration SQL, enforced production TLS/CORS, and 
 4. **Why explicit CORS origins?** Browsers should only expose API responses to the configured frontend origins; CORS is not user authentication.
 5. **Does a warning mean a skipped test?** No. All 52 tests passed; two upstream deprecations are recorded for future dependency maintenance.
 
-## M8 — Deployment preparation (production still pending)
+## M8 — Production deployment and verification
 
-Prepared `render.yaml`, `frontend/vercel.json` and `scripts/deploy/start.py`. The startup script applies Alembic, loads the real seed only into an empty database, and starts FastAPI. Supabase stores durable PostGIS data; Vercel hosts static frontend files; Render runs Python. `docs/deployment.md` records current free-tier limitations. Cloud authentication and cold-browser production tests remain outstanding.
+Vercel serves the live frontend, Render runs FastAPI and Supabase stores durable PostGIS data. The production walkthrough verified three rainfall scenarios, priorities, village details and CORS. `data_pipeline/database.py` centralizes verified Supabase TLS for every connection path. Startup binds the port promptly, returns 503 during initialization, checks every seed table and hands control to Uvicorn after bootstrap. A printed seed row count is progress, not proof of commit: the seed transaction commits after all tables. Final checks: 57 Python tests against production configuration, six frontend tests, lint/build and a fresh-browser walkthrough.
 
 1. **Why three hosts?** Static frontend delivery, Python execution and persistent spatial storage have different needs; the PRD uses simple managed services for each.
 2. **Why keep rasters offline?** The web app only needs compact processed features, reducing memory and deployment work.
 3. **What is a cold start?** A sleeping free API must start again before serving requests; the first load can be slow.
 4. **Why row-level security?** Managed databases can expose tables through an automatic API; no anonymous policies means the browser cannot write these tables.
-5. **Is deployment finished?** No. A tested local container and configuration files are preparation; only a working public URL and production smoke evidence satisfy Gate D.
+5. **What proves deployment finished?** Public data-backed routes, a fresh-browser scenario-to-priority walkthrough, verified CORS, passing tests and saved production evidence. Gate D records each Definition of Done item.
+6. **Why did SSL succeed in Alembic but fail in seed?** They previously built different connection contexts. A shared factory makes every path load the same trusted CA and verify the hostname.
+7. **Why is health different from readiness?** An open port proves a process is listening. The initialization listener returns 503 until bootstrap is complete; Uvicorn then serves the application.

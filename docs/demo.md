@@ -7,7 +7,7 @@
 5. Set five response teams, then three. Show blue outlines, list/detail synchronization and the 65/35 formula. Explain stable ties and the missing-population rule.
 6. Open methodology and point out SAR dates, prototype weights and the non-operational limitation.
 
-Screenshots: `docs/evidence/m4-dashboard.png`, `m4-mobile.png`, `m5-priorities.png`. Automated walkthroughs: `scripts/verify-workflow.cjs` and `verify-integration.cjs`. They use the real API. [Recorded local demo](evidence/floodlens-local-demo.webm). A live URL and production verification are pending cloud access.
+[Open the live dashboard](https://floodlens-lilac.vercel.app). Production assets: [desktop](evidence/production-dashboard.png), [mobile](evidence/production-mobile.png), [methodology](evidence/production-methodology.png), and [recorded production walkthrough](evidence/floodlens-production-demo.webm). `scripts/verify-production.cjs` repeats the live checks. Allow extra time for a sleeping free API; use the recording as a backup. Screenshots and video use real API responses.
 
 ## Interview description (matching the implemented fallback)
 

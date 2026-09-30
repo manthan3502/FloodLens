@@ -4,9 +4,11 @@
 
 FloodLens helps explore flood-prone settlements in Karvir, Panhala, Hatkanangale and Shirol, Kolhapur, Maharashtra. It combines terrain, river proximity, historical satellite change, rainfall scenarios and modeled population to show where limited assessment teams could look first.
 
-![FloodLens dashboard](docs/evidence/m5-priorities.png)
+![Live FloodLens dashboard](docs/evidence/production-dashboard.png)
 
-**Status:** M0–M7 complete; Gate C passed. M8 deployment preparation is complete locally, but cloud authentication and production verification are pending. **No live deployment URL yet; Gate D has not passed.** The GitHub repository is currently private.
+**Status: FLOODLENS COMPLETE — Gate D passed on 30 September 2026.** M0–M8 are complete under the documented Gate A/B reduced scope. The GitHub repository remains private.
+
+[Open the live dashboard](https://floodlens-lilac.vercel.app) · [API documentation](https://floodlens-nz9r.onrender.com/docs) · [Production walkthrough video](docs/evidence/floodlens-production-demo.webm)
 
 ## Why this project
 
@@ -74,11 +76,13 @@ npm run lint
 npm run build
 ```
 
-M7 verified **52 Python tests**, **6 frontend tests**, real-data validation, lint/build, a literal fresh GitHub clone, and scripted Edge integration. Browser scripts exercise rainfall changes, team counts, map/detail agreement, failures and delayed responses. [Evidence and milestone records](docs/milestones/M7-testing-hardening.md) distinguish local results from remote CI and production checks.
+Final verification: **57 Python tests passed against both local PostGIS and production Supabase**, plus **6 frontend tests**, Ruff, Black, frontend lint and build. Read-only production database tests used verified TLS and production CORS settings. Two upstream deprecation warnings remain; no tests were skipped. M7 already verified real-data validation and a literal fresh GitHub clone. [Gate D evidence](docs/gate-d.md) records the final checks.
+
+Run the production browser check with `APP_URL=https://floodlens-lilac.vercel.app`, `API_BASE_URL=https://floodlens-nz9r.onrender.com`, an installed Playwright module and Edge: `node scripts/verify-production.cjs`. It writes screenshots, video and machine-readable results to `docs/evidence/`.
 
 ## Demo and documentation
 
-Follow [the two-minute walkthrough](docs/demo.md), using the screenshot above as a local demo reference. [Watch the recorded local demo](docs/evidence/floodlens-local-demo.webm). A production URL will be added only after deployment verification.
+Follow [the two-minute walkthrough](docs/demo.md) on the [live dashboard](https://floodlens-lilac.vercel.app). [Watch the recorded production demo](docs/evidence/floodlens-production-demo.webm). Desktop, mobile and methodology screenshots were captured from the public deployment.
 
 - [Architecture](docs/architecture.md) · [Sources and licenses](docs/data-sources.md)
 - [Methodology](docs/methodology.md) · [Scoring card](docs/model-card.md) · [Limitations](docs/limitations.md)
@@ -91,7 +95,7 @@ This academic prototype estimates relative susceptibility, not the exact timing,
 
 ## Deployment and future work
 
-Prepared for Vercel Hobby frontend, Render Free API and Supabase Free PostGIS. Authentication and cold-browser production smoke tests are outstanding. Free-tier cold starts and quotas limit availability.
+Deployed on Vercel Hobby (frontend), Render Free (API) and Supabase Free (PostGIS). A fresh browser loaded all 380 settlements in 16.8 seconds in the final recorded check; the complete desktop/mobile workflow took 76.5 seconds. A sleeping Render instance can take longer. Free-tier quotas and cold starts limit availability; the production recording provides a backup demo. This test used a fresh browser session, not a deliberately suspended backend.
 
 Future work: independent flood-label validation and sensitivity assessment, improved boundary/population completeness, river gauges and forecast inputs, then additional tehsils and explicit multi-resource/travel-time constraints. These are not implemented features.
 

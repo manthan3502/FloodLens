@@ -1,0 +1,35 @@
+{
+  "checked_at": "2026-09-30T10:24:20.041Z",
+  "appUrl": "https://floodlens-lilac.vercel.app",
+  "apiUrl": "https://floodlens-nz9r.onrender.com",
+  "cold_browser": true,
+  "first_load_ms": 16766,
+  "elapsed_ms": 76494,
+  "villages": 380,
+  "scenarios": [
+    "normal",
+    "heavy",
+    "extreme"
+  ],
+  "all_village_scores_increase": true,
+  "legends": {
+    "normal": "Low\n67\nMedium\n237\nHigh\n76\nCritical\n0",
+    "heavy": "Low\n33\nMedium\n160\nHigh\n187\nCritical\n0",
+    "extreme": "Low\n8\nMedium\n114\nHigh\n253\nCritical\n5"
+  },
+  "latest_priority_ids": [
+    "v-275300428743412000",
+    "v-275300428504208000",
+    "v-275300428543406000"
+  ],
+  "priority_determinism": true,
+  "map_ranking_detail_agree": true,
+  "population_and_factors_verified": true,
+  "cors": {
+    "allowed_origin": "https://floodlens-lilac.vercel.app",
+    "untrusted_origin_rejected": true
+  },
+  "mobile_no_horizontal_overflow": true,
+  "errors": [],
+  "apiFailures": []
+}

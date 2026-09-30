@@ -1,6 +1,12 @@
 # Deployment
 
-Status: prepared; cloud authentication and actual production smoke verification remain pending. No live URL is claimed.
+Status: deployed and production-verified on 30 September 2026. [Gate D evidence](gate-d.md).
+
+- Frontend: https://floodlens-lilac.vercel.app
+- API: https://floodlens-nz9r.onrender.com
+- Health: `GET /health`; villages: `GET /villages`; dashboard data: `POST /scenarios/evaluate`. Routes have no `/api/v1` prefix.
+- Render: `ENV=production`, private `DATABASE_URL`, `CORS_ALLOWED_ORIGINS=https://floodlens-lilac.vercel.app`. Render supplies `PORT`.
+- Vercel: `VITE_API_BASE_URL=https://floodlens-nz9r.onrender.com`.
 
 ## Topology
 
@@ -15,9 +21,9 @@ Vercel Hobby hosts `frontend/`; Render's explicitly **free** Docker service runs
 
 For agent-driven deployment via APIs instead of dashboard steps, put credentials in the ignored root `.env.deploy` file (never chat): VERCEL_TOKEN, RENDER_API_KEY, SUPABASE_ACCESS_TOKEN if project creation is needed, and DATABASE_URL after project creation. Non-secret project/service IDs and URLs may be shared. Existing CLI login is also usable. Never commit the file.
 
-## Verification required before Gate D
+## Production verification
 
-Run `scripts/smoke_api.py` with API_BASE_URL set to the HTTPS API. Open the frontend in a fresh browser context and complete Normal→Extreme→five teams→three teams→village detail; inspect network/console errors and map/list agreement. Repeat backend tests with a separate deployed test database/configuration where appropriate; do not point destructive test fixtures at production. Save actual URLs and evidence in M8 before marking complete.
+Run `scripts/smoke_api.py` with API_BASE_URL set to the HTTPS API. Open the frontend in a fresh browser context and complete Normal→Extreme→five teams→three teams→village detail; inspect network/console errors and map/list agreement. Repeat backend tests with a separate deployed test database/configuration where appropriate; do not point destructive test fixtures at production. The final run passed: all seven API routes, three rainfall presets, five/three teams, village details, map/list agreement, CORS and mobile layout. See `docs/evidence/production-smoke.json`. Production database tests were reviewed as read-only; all 57 passed with production TLS/CORS configuration.
 
 ## Current provider limitations
 

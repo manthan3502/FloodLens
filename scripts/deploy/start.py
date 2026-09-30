@@ -49,8 +49,7 @@ def stop_initialization_server(server, thread):
 
 def seed_is_complete():
     columns = ",".join(
-        f'(SELECT count(*) FROM "{table}") AS "{table}"'
-        for table in SEED_COUNTS
+        f'(SELECT count(*) FROM "{table}") AS "{table}"' for table in SEED_COUNTS
     )
     counts = query(f"SELECT {columns}")[0]
     return all(counts[table] >= expected for table, expected in SEED_COUNTS.items())

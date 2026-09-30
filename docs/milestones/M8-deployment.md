@@ -1,36 +1,37 @@
 # M8 — Deployment, documentation and portfolio
 
-Status: **in progress — production verification pending**. Gate D pending.
+Status: **complete — Gate D GO, 30 September 2026**. See [the full Definition of Done checklist](../gate-d.md).
 
-## Completed independent work
+## Live deployment
 
-- Render Blueprint explicitly selects the free Docker plan; Vercel Vite configuration added. Verified-TLS PostgreSQL connections and explicit production HTTPS CORS are required.
-- Deployment startup applies migrations, seeds an empty database and scores missing metadata before Uvicorn. Tested with a new empty local database: 380 settlements and 38,083 cells loaded, scoring hashes matched, all seven HTTP endpoints returned 200.
-- Migration 0002 enables row-level security on 11 tables so a managed database's anonymous API cannot become a write path. Local SQL confirmed all 11 protected; backend owner connections still work.
-- README, architecture, methodology, source audit, scoring card, limitations, student notes, local setup, deployment instructions, MIT software license and demo walkthrough prepared. Source-data licenses remain separate.
-- Desktop/mobile/error screenshots and real local browser demo material captured. Local assets are not presented as production proof.
-- GitHub CI run [36571888866](https://github.com/manthan3502/FloodLens/actions/runs/36571888866) succeeded for M7 commit `c648fcc`.
+- Dashboard: https://floodlens-lilac.vercel.app
+- API: https://floodlens-nz9r.onrender.com
+- Database: Supabase PostGIS, accessed through verified TLS.
+- Repository remains private; no visibility or paid-plan change was made.
 
-## Actual access result
+## Final verification
 
-Vercel CLI 61.0.0 `whoami` returned **Logged out**. No deployment token environment variables or ignored `.env.deploy` file were present. Browser-control initialization failed twice with “trusted Node process exited unexpectedly.” No cloud resources were created, no paid plans selected, and no tokens invented. Authentication request was sent to the owner while independent documentation continued.
+The fresh Edge browser walkthrough rendered 380 real village polygons, exercised Normal → Heavy → Extreme rainfall, five → three teams, village detail, population, five score contributions, SAR highlighting and methodology. Every village score increased with rainfall. Priority responses were deterministic and matched list order, blue map outlines and selected detail. Desktop and 390 px mobile captures were inspected. No page errors or failed API responses occurred. Production CORS accepted the Vercel origin and rejected an unrelated origin.
 
-## Remaining work
+The measured first load was 16.766 seconds; the full desktop/mobile test took 76.494 seconds. This used a fresh browser session; the Render service was not deliberately suspended. Free-tier wake-up may take longer. Machine-readable results: `docs/evidence/production-smoke.json`.
 
-Authenticate Vercel/Render/Supabase, provision only free resources, deploy and initialize PostGIS, set exact frontend/backend origins, run cold-browser production workflow and HTTP smoke tests, record actual URLs and production evidence, then run Gate D and make the final completion commit. Repository visibility remains private unless the owner authorizes changing it.
+All seven production API smoke routes returned 200. All **57 Python tests passed locally and against the actual Supabase database with production TLS/CORS settings**. Database tests were reviewed to contain read-only queries; startup tests mock mutations. All **6 frontend tests**, frontend lint/build, Ruff and Black passed. Two upstream deprecation warnings remain, with no skips. M7's real-data validation and literal fresh-clone evidence remain valid and were not repeated.
 
-Do not mark FloodLens complete until deployment and production verification pass.
+## Final artifacts and cleanup
 
-## Production diagnosis — 2026-09-30
+README, deployment, architecture, methodology wording, limitations, demo guide and student notes now describe the verified live system. Production screenshots include desktop, mobile and methodology. `docs/evidence/floodlens-production-demo.webm` is the actual production walkthrough recording. The repeatable script is `scripts/verify-production.cjs`.
 
-The deployed Render service at `https://floodlens-nz9r.onrender.com` exposes the repository's unprefixed routes. `GET /health` returned 200, while `GET /villages`, `GET /model/metadata`, and `POST /scenarios/evaluate` returned the application's generic 503 data-unavailable response. `/healthz` and `/api/v1/villages` are not application routes and correctly returned 404.
+Reviewed and retained `.gitignore`'s Vercel exclusion and `.vercelignore`. Corrected Black formatting in two deployment files. No unrelated application behavior changed. Secret checks covered tracked environment files, known production credentials in Git history, and private-key/GitHub-token patterns. No matches were found. Local credentials, caches, dependencies and raw rasters remain ignored.
 
-The manual Docker service could use the Dockerfile's direct Uvicorn CMD, bypassing the migration/seed bootstrap that `render.yaml` overrides with `python scripts/deploy/start.py`. The Dockerfile default now uses the same bootstrap command, so both Blueprint and manual Docker deployments apply migrations, seed an empty database, materialize scoring metadata, and only then start Uvicorn. The remaining Render variables are `ENV=production`, `DATABASE_URL`, and `CORS_ALLOWED_ORIGINS`; Render supplies `PORT` automatically. A live 200 health response does not prove database readiness.
+## Deployment fixes retained in history
 
-The next Render bootstrap reached the Supabase Session Pooler but pg8000 rejected its private certificate chain. Database URL and verified TLS configuration are now shared by Alembic, the API, seed import and scoring paths. Each adds Supabase's public Root 2021 CA to a Python `SSLContext` while retaining `CERT_REQUIRED` and hostname verification. No Render variable was added; the existing `DATABASE_URL` remains valid.
+- `d78f7a0`: manual Docker service runs migration/seed bootstrap.
+- `cf7519a`: Supabase public CA loaded with certificate and hostname verification.
+- `855e01c`: shared verified TLS for Alembic, API, seed and scoring.
+- `7609b1e`: immediate initialization listener, all-table completeness check and Uvicorn handoff.
 
-The first production seed exceeded Render's port-scan window after loading the largest tables. Startup now binds the assigned port immediately with an explicit 503 initialization response. It checks every seeded table against the artifact manifest, resumes partial imports idempotently, skips the full import after completion, and hands the same port to Uvicorn after bootstrap.
+Supabase bootstrap and data-backed production routes were subsequently verified. Seed progress messages precede the final transaction commit; partial progress logs alone do not prove persisted rows. Subsequent starts check all seed tables and skip a complete import. Render variables remain `ENV`, `DATABASE_URL`, `CORS_ALLOWED_ORIGINS`; Render supplies `PORT`.
 
-Final local verification after deployment preparation: all 52 Python tests passed against the bootstrap-created database with row-level security enabled; six frontend tests, lint and build passed. Recorded local demo: `docs/evidence/floodlens-local-demo.webm` (about 1.5 MB). `scripts/verify-production.cjs` requires actual HTTPS application/API URLs and remains unrun until cloud access exists.
+## Gate decision
 
-Final startup race fixed: Compose now checks API liveness, and documented startup waits for health before verification. A retry after server initialization had already confirmed all endpoints; the health check makes that ordering explicit.
+**GO. FLOODLENS COMPLETE** under the approved Gate A/B reduced scope: source-boundary limitations and a transparent susceptibility index. No supervised ML accuracy or operational flood-warning claim is made. The completion commit contains this record, production evidence and the Gate D checklist; Git history identifies the exact commit without a self-referential hash.
