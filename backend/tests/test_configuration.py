@@ -6,6 +6,18 @@ from pathlib import Path
 
 from app.core import db
 
+from data_pipeline import load
+
+
+def assert_verified_supabase_context(context):
+    assert context.verify_mode == ssl.CERT_REQUIRED
+    assert context.check_hostname
+    assert any(
+        dict(name[0] for name in certificate["subject"]).get("commonName")
+        == "Supabase Root 2021 CA"
+        for certificate in context.get_ca_certs()
+    )
+
 
 def test_production_database_requires_verified_tls(monkeypatch):
     monkeypatch.setenv("ENV", "production")
@@ -21,14 +33,23 @@ def test_production_database_requires_verified_tls(monkeypatch):
 
     monkeypatch.setattr(db, "create_engine", create)
     db.engine.__wrapped__()
-    context = captured["connect_args"]["ssl_context"]
-    assert context.verify_mode == ssl.CERT_REQUIRED
-    assert context.check_hostname
-    assert any(
-        dict(name[0] for name in certificate["subject"]).get("commonName")
-        == "Supabase Root 2021 CA"
-        for certificate in context.get_ca_certs()
+    assert_verified_supabase_context(captured["connect_args"]["ssl_context"])
+
+
+def test_seed_connection_uses_verified_tls(monkeypatch):
+    monkeypatch.setenv("ENV", "production")
+    monkeypatch.setenv(
+        "DATABASE_URL",
+        "postgresql://example:placeholder@example.invalid/test?sslmode=require",
     )
+    captured = {}
+
+    def connect(**kwargs):
+        captured.update(kwargs)
+
+    monkeypatch.setattr(load.pg8000.dbapi, "connect", connect)
+    load.connect()
+    assert_verified_supabase_context(captured["ssl_context"])
 
 
 def test_production_rejects_unconfigured_or_http_cors():

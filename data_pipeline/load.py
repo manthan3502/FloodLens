@@ -3,27 +3,13 @@
 import gzip
 import json
 import math
-import os
-import ssl
 from contextlib import closing
-from urllib.parse import parse_qs, unquote, urlparse
+from urllib.parse import unquote, urlparse
 
 import pg8000.dbapi
 
+from data_pipeline.database import database_url, requires_ssl, verified_ssl_context
 from data_pipeline.feasibility import ROOT
-
-
-def database_url():
-    url = os.environ.get("DATABASE_URL")
-    if not url:
-        for line in (ROOT / ".env").read_text().splitlines():
-            if line.startswith("DATABASE_URL="):
-                url = line.split("=", 1)[1]
-    if not url:
-        raise ValueError("DATABASE_URL is required")
-    return url.replace("postgresql+psycopg://", "postgresql://").replace(
-        "postgresql+pg8000://", "postgresql://"
-    )
 
 
 def number(value):
@@ -31,20 +17,15 @@ def number(value):
 
 
 def connect():
-    url = urlparse(database_url())
+    raw_url = database_url()
+    url = urlparse(raw_url)
     return pg8000.dbapi.connect(
         user=unquote(url.username),
         password=unquote(url.password or ""),
         host=url.hostname,
         port=url.port or 5432,
         database=url.path.lstrip("/"),
-        ssl_context=(
-            ssl.create_default_context()
-            if os.getenv("ENV") == "production"
-            or parse_qs(url.query).get("sslmode", [None])[0]
-            in {"require", "verify-full", "verify-ca"}
-            else None
-        ),
+        ssl_context=verified_ssl_context() if requires_ssl(raw_url) else None,
     )
 
 
