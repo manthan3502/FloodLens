@@ -21,6 +21,12 @@ Authenticate Vercel/Render/Supabase, provision only free resources, deploy and i
 
 Do not mark FloodLens complete until deployment and production verification pass.
 
+## Production diagnosis — 2026-09-30
+
+The deployed Render service at `https://floodlens-nz9r.onrender.com` exposes the repository's unprefixed routes. `GET /health` returned 200, while `GET /villages`, `GET /model/metadata`, and `POST /scenarios/evaluate` returned the application's generic 503 data-unavailable response. `/healthz` and `/api/v1/villages` are not application routes and correctly returned 404.
+
+The manual Docker service could use the Dockerfile's direct Uvicorn CMD, bypassing the migration/seed bootstrap that `render.yaml` overrides with `python scripts/deploy/start.py`. The Dockerfile default now uses the same bootstrap command, so both Blueprint and manual Docker deployments apply migrations, seed an empty database, materialize scoring metadata, and only then start Uvicorn. The remaining Render variables are `ENV=production`, `DATABASE_URL`, and `CORS_ALLOWED_ORIGINS`; Render supplies `PORT` automatically. A live 200 health response does not prove database readiness.
+
 Final local verification after deployment preparation: all 52 Python tests passed against the bootstrap-created database with row-level security enabled; six frontend tests, lint and build passed. Recorded local demo: `docs/evidence/floodlens-local-demo.webm` (about 1.5 MB). `scripts/verify-production.cjs` requires actual HTTPS application/API URLs and remains unrun until cloud access exists.
 
 Final startup race fixed: Compose now checks API liveness, and documented startup waits for health before verification. A retry after server initialization had already confirmed all endpoints; the health check makes that ordering explicit.
