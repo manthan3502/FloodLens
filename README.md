@@ -77,7 +77,7 @@ npm run lint
 npm run build
 ```
 
-Final verification: **57 Python tests passed against both local PostGIS and production Supabase**, plus **6 frontend tests**, Ruff, Black, frontend lint and build. Read-only production database tests used verified TLS and production CORS settings. Two upstream deprecation warnings remain; no tests were skipped. M7 already verified real-data validation and a literal fresh GitHub clone. [Gate D evidence](docs/gate-d.md) records the final checks.
+Gate D / M8 recorded **57 Python tests passed against both local PostGIS and production Supabase**, plus **6 frontend tests**, Ruff, Black, frontend lint and build. Read-only production database tests used verified TLS and production CORS settings. The final post-QA state after the cold-start recovery fix passed **58 Python tests and 10 frontend tests**. Two upstream deprecation warnings remain; no tests were skipped. M7 already verified real-data validation and a literal fresh GitHub clone. [Gate D evidence](docs/gate-d.md) preserves the historical milestone checks.
 
 Run the production browser check with `APP_URL=https://floodlens-lilac.vercel.app`, `API_BASE_URL=https://floodlens-nz9r.onrender.com`, an installed Playwright module and Edge: `node scripts/verify-production.cjs`. It writes screenshots, video and machine-readable results to `docs/evidence/`.
 

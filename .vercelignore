@@ -1,6 +1,11 @@
 data/
 .env
 .env.deploy
+.env.*
+**/.env
+**/.env.*
+!.env.example
+!**/.env.example
 .tools/
 .pytest_cache/
 .ruff_cache/

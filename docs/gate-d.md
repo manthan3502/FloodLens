@@ -38,7 +38,7 @@
 ## Verification commands and scope
 
 - `docker compose -f docker-compose.yml -f .cache/gate-d-compose.yml run --rm api python -m pytest backend/tests data_pipeline/tests -q`: **57 passed** using the existing Linux geospatial image and local PostGIS.
-- `docker run --rm --env-file .env.deploy -e ENV=production -e CORS_ALLOWED_ORIGINS=https://floodlens-lilac.vercel.app -e PYTHONPATH=/work/backend:/work -v D:/Projects/FloodLens:/work floodlens-pipeline python -m pytest backend/tests data_pipeline/tests -q`: **57 passed** against Supabase. Credentials were never printed; DB checks were read-only.
+- `docker run --rm --env-file .env.deploy -e ENV=production -e CORS_ALLOWED_ORIGINS=https://floodlens-lilac.vercel.app -e PYTHONPATH=/work/backend:/work -v <repo-path>:/work floodlens-pipeline python -m pytest backend/tests data_pipeline/tests -q`: **57 passed** against Supabase. Credentials were never printed; DB checks were read-only.
 - `ruff check backend data_pipeline scripts`, `black --check backend data_pipeline scripts`: **passed** in the Linux image.
 - `npm test`, `npm run lint`, `npm run build` from `frontend`: **6 tests passed**, lint/build passed.
 - `scripts/smoke_api.py` with the live API base: **seven routes returned 200**.
